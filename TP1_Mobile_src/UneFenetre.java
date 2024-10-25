@@ -54,7 +54,7 @@ class UneFenetre extends JFrame {
         telThread1.start();
         telThread2.start();
 
-        setSize(LARG, HAUT);
+        setSize(1000, 800);
         setVisible(true);
     }
 }
