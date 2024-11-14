@@ -6,7 +6,9 @@ Pour cet exercice un code nous a été fourni dans lequel il y avait :
 
 - Une classe **UnMobile** qui étend JPanel et implémente Runnable. Elle représente un mobile qui se déplace horizontalement dans une fenêtre.
 - Une Classe **UneFenetre** qui étend JFrame, crée une instance de UnMobile, et lance un thread pour gérer le mouvement.
-- Une classe **TPMobile** qui instancie la classe UneFenetre. Il s’agit ici du Main
+- Une classe **TPMobile** qui instancie la classe UneFenetre. Il s’agit ici du Main.
+
+![Diagramme UML du TPMobile](Diagramme_TP_Mobile.png)
 
 Le but de ce premier exercice était d’écrire le code afin que le mobile inverse sa direction une fois arrivé au bout de la fenêtre.
 
