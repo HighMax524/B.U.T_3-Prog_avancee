@@ -10,16 +10,25 @@ import java.lang.String;
 
 public class Affichage extends Thread{
 	String texte; 
+	semaphoreBinaire semaphoreBinaire;
         
-	public Affichage (String txt){texte=txt;}
+	public Affichage (String txt, semaphoreBinaire semaphoreBinaire){
+		texte=txt;
+		this.semaphoreBinaire = semaphoreBinaire;
+	}
 	
 	public void run(){
-
-	    synchronized (System.out) { //section critique
-	    for (int i=0; i<texte.length(); i++){
-		    System.out.print(texte.charAt(i));
-		    try {sleep(100);} catch(InterruptedException e){};
-		}
-	    }
-	}
+	    try {
+            semaphoreBinaire.syncWait(); // Décrémente le sémaphore pour obtenir l'accès
+            for (int i = 0; i < texte.length(); i++) {
+                System.out.print(texte.charAt(i));
+                try {
+                    sleep(100);
+                } catch (InterruptedException e) {}
+            }
+        } finally {
+            semaphoreBinaire.syncSignal(); // Incrémente le sémaphore pour libérer l'accès
+        }
+    }
 }
+
