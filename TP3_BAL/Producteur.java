@@ -1,5 +1,7 @@
 package TP3_BAL;
 
+import java.util.Scanner;
+
 class Producteur extends Thread {
     private Bal bal;
 
@@ -9,16 +11,17 @@ class Producteur extends Thread {
 
     @Override
     public void run() {
-        try {
-            for (int i = 0; i < 6; i++) {
-                String lettre = "Lettre " + i;
-                System.out.println("Producteur dépose: " + lettre);
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (true) {
+                System.out.print("Entrez une lettre (Q pour quitter) : ");
+                String lettre = scanner.nextLine();
                 bal.deposer(lettre);
-                Thread.sleep(100); 
+                if ("Q".equals(lettre)) {
+                    break;
+                }
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 }
-
