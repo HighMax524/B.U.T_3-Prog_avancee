@@ -8,7 +8,7 @@ Pour cet exercice un code nous a été fourni dans lequel il y avait :
 - Une Classe **UneFenetre** qui étend JFrame, crée une instance de UnMobile, et lance un thread pour gérer le mouvement.
 - Une classe **TPMobile** qui instancie la classe UneFenetre. Il s’agit ici du Main.
 
-![Diagramme UML du TPMobile](Diagramme_TP_Mobile.png)
+![Diagramme UML du TPMobile](res/Diagramme_TP_Mobile.png)
 
 Le but de ce premier exercice était d’écrire le code afin que le mobile inverse sa direction une fois arrivé au bout de la fenêtre.
 
@@ -37,10 +37,10 @@ Pour faire en sorte que la boucle affiche les messages dan le bonne ordre (« AA
 Cette méthode permet de s’assurer que la section critique est utilisée seulement par un seul thread a chaque fois afin que chaque thread affiche son message en entier avant qu’un autre affiche son message également. 
 Pour faire cela il y a 2 méthodes possible : 
 -	Celle où on ne connaît pas la ressource critique. Pour cela on crée une fausse classe Exclusion puis on synchronized sur cette classe
-![Image du code sans connaissance de la ressource critique](image_synchronized.png)
+![Image du code sans connaissance de la ressource critique](res/image_synchronized.png)
 
 -	Celle où on connaît la ressource critique comme dans l’exercice où il s’agit de « out ». Dans ce cas il faut faire ce qui est dans le code de Affichage.java
-![Image du code avec connaissance de la ressource critique](image_synchronized_out.png)
+![Image du code avec connaissance de la ressource critique](res/image_synchronized_out.png)
   
 **Exercice II**
 
