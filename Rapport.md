@@ -69,6 +69,12 @@ I2)
 Pour cette deuxième partie de l'exercice il fallait modifier le code afin que pour la tache déposer, le producteur écrive lui-même une lettre au clavier et que les deux tâches deposer et retirer s'arrêtent lorsque le producteur écrit une lettre ne contenant que le mot "Q".
 Pour cela il a fallut importer la classe **Scaner**. Cette classe permet ainsi au producteur d'écrire lui-même une lettre au clavier. Ensuite il faut faire une condition pour laquelle on compare la lettre avec le terme permettant d'arreter les tâche ("Q"). Et on arrête la tâche si c'est le cas.
 
+**Exercice 2**
+
+Dans cet Exercice, on nous dit que la Bal peut contenir un certain nombre (N) de lettre. Il faut égalemment que les deux tâches qui sont le producteur et le consommateur reste inchangé sur le fond. Cependant, il faut maintenant que le producteur depose dans la Bal des lettres allant de A à Z puis dépose une lettre "*" pour signaler la fin de la tâche. Le consommateur lui continue de lire les lettre et de les afficher comme avant et s'arrete à la lecture de la lettre "*".
+
+Pour cela il faut creer une classe **Tampon** qui implement le tampon circulaire et ayant une structure de tableau où les lettres disponibles seront repérées par deux indices "tete" et "queue". De plus, il faut que le nombre de lettre stockée dans une variable nbLettre ne dépasse pas la longeur du tableau 
+
 
 
 
