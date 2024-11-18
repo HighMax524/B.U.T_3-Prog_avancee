@@ -61,6 +61,8 @@ Pour cela il a fallu créer :
 -	Une classe **Producteur** qui étend **Thread**. Cette classe représente donc le producteur qui peut déposer une lettre.
 -	Une classe **Consommateur** qui étend **Thread**. Cette classe représente donc le consommateur qui peut retirer une lettre.
 
+![Diagramme UML TP3 exercice 1](res/Diagramme_TP3_Ex1.png)
+
 I1) 
 Pour faire en sorte que le consommateur ne puisse deposer une lettre seulement lorsque la Bal est vide et que le consommateur, lui, puissent lire une lettre seulement si il y en a une il a fallu mettre un verrou mutex sur la ressource critique qui est la Bal (dans le code il s'agit de **this**). Pour cela, il faut utiliser la méthode synchronized sur this est cette méthode entoure la section critique qui correspond à l'ensemble de la méthode deposer() et l'ensemble de la metode retirer().
 Cette méthode permet de s’assurer que la section critique (la Bal) est utilisée seulement par un seul thread a chaque fois afin qu'elle ne contiennent qu'une seule lettre a chaque fois et que le consommateur puisse retirer cette lettre seulement lorsqu'elle est présente dans la Bal.
