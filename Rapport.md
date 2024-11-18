@@ -77,7 +77,9 @@ Dans cet Exercice, on nous dit que la Bal peut contenir un certain nombre (N) de
 
 Pour cela il faut creer une classe **Tampon** qui implement le tampon circulaire et ayant une structure de tableau où les lettres disponibles seront repérées par deux indices "tete" et "queue". De plus, il faut que le nombre de lettre stockée dans une variable nbLettre ne dépasse pas la longeur du tableau.
 
-De plus, il a fallut le Main afin d'initialiser un tampon de taille fixe, puis de démarrer la tâche producteur et la tâche consommateur. Ces threads vont ainsi interagir via le tampon en appliquant les mécanismes de synchronisation
+De plus, il a fallut le Main afin d'initialiser un tampon de taille fixe, puis de démarrer la tâche producteur et la tâche consommateur. Ces threads vont ainsi interagir via le tampon en appliquant les mécanismes de synchronisation.
+
+![Diagramme UML TP3 exercice 2](res/Diagramme_TP3_Ex2.png)
 
 
 
