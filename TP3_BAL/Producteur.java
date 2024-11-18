@@ -1,27 +1,25 @@
 package TP3_BAL;
 
-import java.util.Scanner;
-
 class Producteur extends Thread {
-    private Bal bal;
+    private Tampon tampon;
 
-    public Producteur(Bal bal) {
-        this.bal = bal;
+    // Constructeur qui accepte un objet Tampon
+    public Producteur(Tampon tampon) {
+        this.tampon = tampon;
     }
 
     @Override
     public void run() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            while (true) {
-                System.out.print("Entrez une lettre (Q pour quitter) : ");
-                String lettre = scanner.nextLine();
-                bal.deposer(lettre);
-                if ("Q".equals(lettre)) {
-                    break;
-                }
+        try {
+            for (char lettre = 'A'; lettre <= 'Z'; lettre++) {
+                System.out.println("Producteur dépose: " + lettre);
+                tampon.deposer(String.valueOf(lettre));
+                Thread.sleep(100);
             }
+            tampon.deposer("*");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 }
+

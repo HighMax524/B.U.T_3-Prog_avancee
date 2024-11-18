@@ -2,12 +2,13 @@ package TP3_BAL;
 
 public class Main {
     public static void main(String[] args) {
-        Bal bal = new Bal();
-        Producteur producteur = new Producteur(bal);
-        Consommateur consommateur = new Consommateur(bal);
+        Tampon tampon = new Tampon(5); // Tampon de taille 5
+        Producteur producteur = new Producteur(tampon);
+        Consommateur consommateur = new Consommateur(tampon);
 
         producteur.start();
         consommateur.start();
     }
 }
+
 

@@ -1,22 +1,27 @@
 package TP3_BAL;
 
 class Consommateur extends Thread {
-    private Bal bal;
+    private Tampon tampon;
 
-    public Consommateur(Bal bal) {
-        this.bal = bal;
+    // Constructeur
+    public Consommateur(Tampon tampon) {
+        this.tampon = tampon;
     }
 
     @Override
     public void run() {
         try {
             while (true) {
-                String lettre = bal.retirer();
+                String lettre = tampon.retirer();
                 System.out.println("Consommateur retire: " + lettre);
-                Thread.sleep(100);
+                if ("*".equals(lettre)) { // Arrêt si le caractère spécial est retiré
+                    break;
+                }
+                Thread.sleep(200); // Simulation de temps
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 }
+
