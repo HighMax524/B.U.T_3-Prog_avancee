@@ -75,7 +75,9 @@ Pour cela il a fallut importer la classe **Scaner**. Cette classe permet ainsi a
 
 Dans cet Exercice, on nous dit que la Bal peut contenir un certain nombre (N) de lettre. Il faut égalemment que les deux tâches qui sont le producteur et le consommateur reste inchangé sur le fond. Cependant, il faut maintenant que le producteur depose dans la Bal des lettres allant de A à Z puis dépose une lettre "\*" pour signaler la fin de la tâche. Le consommateur lui continue de lire les lettre et de les afficher comme avant et s'arrete à la lecture de la lettre "\*".
 
-Pour cela il faut creer une classe **Tampon** qui implement le tampon circulaire et ayant une structure de tableau où les lettres disponibles seront repérées par deux indices "tete" et "queue". De plus, il faut que le nombre de lettre stockée dans une variable nbLettre ne dépasse pas la longeur du tableau 
+Pour cela il faut creer une classe **Tampon** qui implement le tampon circulaire et ayant une structure de tableau où les lettres disponibles seront repérées par deux indices "tete" et "queue". De plus, il faut que le nombre de lettre stockée dans une variable nbLettre ne dépasse pas la longeur du tableau.
+
+De plus, il a fallut le Main afin d'initialiser un tampon de taille fixe, puis de démarrer la tâche producteur et la tâche consommateur. Ces threads vont ainsi interagir via le tampon en appliquant les mécanismes de synchronisation
 
 
 
