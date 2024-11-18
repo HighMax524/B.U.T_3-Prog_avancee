@@ -8,7 +8,7 @@ Pour cet exercice un code nous a été fourni dans lequel il y avait :
 - Une Classe **UneFenetre** qui étend JFrame, crée une instance de UnMobile, et lance un thread pour gérer le mouvement.
 - Une classe **TPMobile** qui instancie la classe UneFenetre. Il s’agit ici du Main.
 
-![Diagramme UML du TPMobile](Diagramme_TP_Mobile.png)
+![Diagramme UML du TPMobile](res/Diagramme_TP_Mobile.png)
 
 Le but de ce premier exercice était d’écrire le code afin que le mobile inverse sa direction une fois arrivé au bout de la fenêtre.
 
@@ -37,10 +37,10 @@ Pour faire en sorte que la boucle affiche les messages dan le bonne ordre (« AA
 Cette méthode permet de s’assurer que la section critique est utilisée seulement par un seul thread a chaque fois afin que chaque thread affiche son message en entier avant qu’un autre affiche son message également. 
 Pour faire cela il y a 2 méthodes possible : 
 -	Celle où on ne connaît pas la ressource critique. Pour cela on crée une fausse classe Exclusion puis on synchronized sur cette classe
-![Image du code sans connaissance de la ressource critique](image_synchronized.png)
+![Image du code sans connaissance de la ressource critique](res/image_synchronized.png)
 
 -	Celle où on connaît la ressource critique comme dans l’exercice où il s’agit de « out ». Dans ce cas il faut faire ce qui est dans le code de Affichage.java
-![Image du code avec connaissance de la ressource critique](image_synchronized_out.png)
+![Image du code avec connaissance de la ressource critique](res/image_synchronized_out.png)
   
 **Exercice II**
 
@@ -61,6 +61,8 @@ Pour cela il a fallu créer :
 -	Une classe **Producteur** qui étend **Thread**. Cette classe représente donc le producteur qui peut déposer une lettre.
 -	Une classe **Consommateur** qui étend **Thread**. Cette classe représente donc le consommateur qui peut retirer une lettre.
 
+![Diagramme UML TP3 exercice 1](res/Diagramme_TP3_Ex1.png)
+
 I1) 
 Pour faire en sorte que le consommateur ne puisse deposer une lettre seulement lorsque la Bal est vide et que le consommateur, lui, puissent lire une lettre seulement si il y en a une il a fallu mettre un verrou mutex sur la ressource critique qui est la Bal (dans le code il s'agit de **this**). Pour cela, il faut utiliser la méthode synchronized sur this est cette méthode entoure la section critique qui correspond à l'ensemble de la méthode deposer() et l'ensemble de la metode retirer().
 Cette méthode permet de s’assurer que la section critique (la Bal) est utilisée seulement par un seul thread a chaque fois afin qu'elle ne contiennent qu'une seule lettre a chaque fois et que le consommateur puisse retirer cette lettre seulement lorsqu'elle est présente dans la Bal.
@@ -68,6 +70,14 @@ Cette méthode permet de s’assurer que la section critique (la Bal) est utilis
 I2)
 Pour cette deuxième partie de l'exercice il fallait modifier le code afin que pour la tache déposer, le producteur écrive lui-même une lettre au clavier et que les deux tâches deposer et retirer s'arrêtent lorsque le producteur écrit une lettre ne contenant que le mot "Q".
 Pour cela il a fallut importer la classe **Scaner**. Cette classe permet ainsi au producteur d'écrire lui-même une lettre au clavier. Ensuite il faut faire une condition pour laquelle on compare la lettre avec le terme permettant d'arreter les tâche ("Q"). Et on arrête la tâche si c'est le cas.
+
+**Exercice 2**
+
+Dans cet Exercice, on nous dit que la Bal peut contenir un certain nombre (N) de lettre. Il faut égalemment que les deux tâches qui sont le producteur et le consommateur reste inchangé sur le fond. Cependant, il faut maintenant que le producteur depose dans la Bal des lettres allant de A à Z puis dépose une lettre "\*" pour signaler la fin de la tâche. Le consommateur lui continue de lire les lettre et de les afficher comme avant et s'arrete à la lecture de la lettre "\*".
+
+Pour cela il faut creer une classe **Tampon** qui implement le tampon circulaire et ayant une structure de tableau où les lettres disponibles seront repérées par deux indices "tete" et "queue". De plus, il faut que le nombre de lettre stockée dans une variable nbLettre ne dépasse pas la longeur du tableau.
+
+De plus, il a fallut le Main afin d'initialiser un tampon de taille fixe, puis de démarrer la tâche producteur et la tâche consommateur. Ces threads vont ainsi interagir via le tampon en appliquant les mécanismes de synchronisation
 
 
 
