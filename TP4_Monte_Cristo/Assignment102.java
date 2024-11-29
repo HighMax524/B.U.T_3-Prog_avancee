@@ -3,6 +3,7 @@ package TP4_Monte_Cristo;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
+
 class PiMonteCarlo {
 	AtomicInteger nAtomSuccess;
 	int nThrows;
