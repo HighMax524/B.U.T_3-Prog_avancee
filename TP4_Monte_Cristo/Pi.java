@@ -2,6 +2,7 @@ package TP4_Monte_Cristo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -17,8 +18,15 @@ public class Pi
     public static void main(String[] args) throws Exception 
     {
 	long total=0;
-	// 10 workers, 50000 iterations each
-	total = new Master().doRun(50000, 10);
+	Scanner scanner = new Scanner(System.in);
+
+	System.out.println("enter the number of workers");
+	int nWorkers = scanner.nextInt();
+
+	System.out.println("enter the number of throws");
+	int nThrows = scanner.nextInt();
+
+	total = new Master().doRun(nThrows, nWorkers);
 	System.out.println("total from Master = " + total);
     }
 }
