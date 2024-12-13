@@ -44,8 +44,10 @@ public class Assignment102 {
 		long stopTime = System.currentTimeMillis();
 		System.out.println("Approx value:" + value);
 		System.out.println("Difference to exact value of pi: " + (value - Math.PI));
-		System.out.println("Error: " + (value - Math.PI) / Math.PI * 100 + " %");
-		System.out.println("Available processors: " + Runtime.getRuntime().availableProcessors());
+		System.out.println("% Error: " + (value - Math.PI) / Math.PI * 100 + " %");
+		System.out.println("Error: " + (Math.abs((value - Math.PI)) / Math.PI) +"\n");
+		
+		System.out.println("\nAvailable processors: " + Runtime.getRuntime().availableProcessors());
 		System.out.println("Time Duration: " + (stopTime - startTime) + "ms");
 	}
 }

@@ -56,7 +56,9 @@ class Master {
 
 	long stopTime = System.currentTimeMillis();
 
-	System.out.println("\nPi : " + pi );
+	System.out.println("Approx value: : " + pi );
+	System.out.println("Difference to exact value of pi: " + (pi - Math.PI));
+	System.out.println("% Error: " + (pi - Math.PI) / Math.PI * 100 + " %");
 	System.out.println("Error: " + (Math.abs((pi - Math.PI)) / Math.PI) +"\n");
 
 	System.out.println("Ntot: " + totalCount*numWorkers);
