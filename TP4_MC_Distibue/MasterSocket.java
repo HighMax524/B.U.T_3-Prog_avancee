@@ -1,3 +1,4 @@
+package TP4_MC_Distibue;
 import java.io.*;
 import java.net.*;
 /** Master is a client. It makes requests to numWorkers.
