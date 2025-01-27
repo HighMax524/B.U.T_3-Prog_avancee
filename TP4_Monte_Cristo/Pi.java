@@ -1,4 +1,5 @@
 package TP4_Monte_Cristo;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -26,8 +27,13 @@ public class Pi
 	System.out.println("enter the number of throws");
 	int nThrows = scanner.nextInt();
 
-	total = new Master().doRun(nThrows, nWorkers);
+	FileWriter fileWriter = new FileWriter("result_pi.txt");
+
+	for(int i=0; i< 10; i++){
+		total = new Master().doRun(nThrows, nWorkers);
 	System.out.println("total from Master = " + total);
+	}
+	
     }
 }
 
