@@ -23,7 +23,11 @@ if not speedup_values:
     print("Aucune donnée valide trouvée dans le fichier.")
 else:
     # Tracer le graphe
-    plt.plot(nworkers_values, speedup_values, marker='o', linestyle='-')
+    plt.plot(nworkers_values, speedup_values, marker='o', linestyle='-', label="speedup")
+
+    max_workers = max(nworkers_values) if nworkers_values else 1
+    plt.plot([0, max_workers], [0, max_workers], 'r--', label="sp=p")
+
     plt.xlabel("Nombre de processus")
     plt.ylabel("SP")
     plt.title("Speedup du programme Pi")

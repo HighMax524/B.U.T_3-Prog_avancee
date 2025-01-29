@@ -43,7 +43,7 @@ public class Pi
 	double moySingleWorkerTime = totalSingleWorkerTime / repetition;
 		System.out.println("Temps moyen pour 1 processeur: " + moySingleWorkerTime);
 
-	try (FileWriter fileWriter = new FileWriter("result_pi.txt", true);
+	try (FileWriter fileWriter = new FileWriter("result_pi.txt", false);
 		PrintWriter printWriter = new PrintWriter(fileWriter)){
 			printWriter.printf("Speedup: " + 1 +", Temps 1 worker: " + moySingleWorkerTime + "\n \n");
 		} catch(IOException e){
