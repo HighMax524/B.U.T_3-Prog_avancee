@@ -40,9 +40,19 @@ public class Pi
 		totalSingleWorkerTime += singleWorkerTime;
 	}
 
-	for (int nworkers = 1; nworkers <=nWorkers; nworkers +=2){
+	double moySingleWorkerTime = totalSingleWorkerTime / repetition;
+		System.out.println("Temps moyen pour 1 processeur: " + moySingleWorkerTime);
+
+	try (FileWriter fileWriter = new FileWriter("result_pi.txt", true);
+		PrintWriter printWriter = new PrintWriter(fileWriter)){
+			printWriter.printf("Speedup: " + 1 +", Temps 1 worker: " + moySingleWorkerTime + "\n \n");
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+
+	for (int nworkersCours = 2; nworkersCours <= nWorkers; nworkersCours +=2){
 		for(int j = 0; j <repetition; j ++){
-			long multiWorkerTime = master.doRun(nThrows / nworkers, nworkers);
+			long multiWorkerTime = master.doRun(nThrows / nworkersCours, nworkersCours);
 	
 			totalMultiWorkerTime += multiWorkerTime;
 		}
@@ -50,18 +60,16 @@ public class Pi
 		System.out.println("Total tps 1 worker : " + totalSingleWorkerTime);
 		System.out.println("Total tps plusieurs worker : " + totalMultiWorkerTime);
 	
-		double moySingleWorkerTime = totalSingleWorkerTime / repetition;
-		System.out.println("Temps moyen pour 1 processeur: " + moySingleWorkerTime);
 	
 		double moyMultiWorkerTime = totalMultiWorkerTime / repetition;
-		System.out.println("Temps moyen pour " + nWorkers + " processeur: " + moyMultiWorkerTime);
+		System.out.println("Temps moyen pour " + nworkersCours + " processeur: " + moyMultiWorkerTime);
 	
 		double speedup = (double) moySingleWorkerTime/ moyMultiWorkerTime;
 		System.out.println("Speedup : " + speedup);
 	
 		try (FileWriter fileWriter = new FileWriter("result_pi.txt", true);
 		PrintWriter printWriter = new PrintWriter(fileWriter)){
-			printWriter.printf("Speedup: " + speedup +", Temps 1 worker: " + moySingleWorkerTime + ", Temps avec " + nWorkers +" worker: "+ moyMultiWorkerTime + "\n \n");
+			printWriter.printf("Speedup: " + speedup +", Temps 1 worker: " + moySingleWorkerTime + ", Temps avec " + nworkersCours +" worker: "+ moyMultiWorkerTime + "\n \n");
 		} catch(IOException e){
 			e.printStackTrace();
 		}
