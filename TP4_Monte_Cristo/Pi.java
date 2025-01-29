@@ -1,5 +1,7 @@
 package TP4_Monte_Cristo;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -27,13 +29,23 @@ public class Pi
 	System.out.println("enter the number of throws");
 	int nThrows = scanner.nextInt();
 
-	FileWriter fileWriter = new FileWriter("result_pi.txt");
+	Master master = new Master();
 
-	for(int i=0; i< 10; i++){
-		total = new Master().doRun(nThrows, nWorkers);
-	System.out.println("total from Master = " + total);
+	long singleWorkerTime = master.doRun(nThrows, 1);
+	System.out.println("Temps pour 1 processeur: " + singleWorkerTime);
+
+	long multiWorkerTime = master.doRun(nThrows, nWorkers);
+	System.out.println("Temps pour"+ nWorkers + "processeur: " + singleWorkerTime);
+
+	double speedup = (double) singleWorkerTime/multiWorkerTime;
+	System.out.println("Speedup : " + speedup);
+
+	try (FileWriter fileWriter = new FileWriter("result_pi.txt", true);
+	PrintWriter printWriter = new PrintWriter(fileWriter)){
+		printWriter.printf("Speedup: %.2f, Temps 1 worker: %dms, Temps avec %d worker: %dms%n", speedup, singleWorkerTime, nWorkers, multiWorkerTime);
+	} catch(IOException e){
+		e.printStackTrace();
 	}
-	
     }
 }
 
@@ -70,16 +82,24 @@ class Master {
 
 	long stopTime = System.currentTimeMillis();
 
+	double errRelative = (Math.abs((pi - Math.PI)) / Math.PI);
+	long duration = stopTime - startTime;
+
 	System.out.println("Approx value: : " + pi );
 	System.out.println("Difference to exact value of pi: " + (pi - Math.PI));
 	System.out.println("% Error: " + (pi - Math.PI) / Math.PI * 100 + " %");
-	System.out.println("Error: " + (Math.abs((pi - Math.PI)) / Math.PI) +"\n");
+	System.out.println("Error: " + errRelative +"\n");
 
 	System.out.println("Ntot: " + totalCount*numWorkers);
 	System.out.println("Available processors: " + numWorkers);
-	System.out.println("Time Duration (ms): " + (stopTime - startTime) + "\n");
+	System.out.println("Time Duration (ms): " + duration + "\n");
 
-	System.out.println( (Math.abs((pi - Math.PI)) / Math.PI) +" "+ totalCount*numWorkers +" "+ numWorkers +" "+ (stopTime - startTime));
+	try (FileWriter fileWriter = new FileWriter("result_pi.txt", true);
+	PrintWriter printWriter = new PrintWriter(fileWriter)){
+		printWriter.printf("Erreur relative: %.6f, nthrows: %d, nombre processus: %d, temps : %dms%n", errRelative, totalCount, numWorkers, duration);
+	} catch(IOException e){
+		e.printStackTrace();
+	}
 
 	exec.shutdown();
 	return total;
