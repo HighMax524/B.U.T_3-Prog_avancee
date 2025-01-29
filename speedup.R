@@ -3,9 +3,8 @@ library(ggplot2)
 file_path <- "result_pi.txt"
 data <- readLines(file_path)
 
-speedupValues <- numeric()
-nWorkersValues <- numeric()
-
+speedupValues <- c(1)
+nWorkersValues <- c(1)
 for(line in data){
     if(grepl("Speedup:", line)){
         parts <- unlist(strsplit(line, ","))

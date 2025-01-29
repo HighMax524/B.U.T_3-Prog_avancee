@@ -34,32 +34,40 @@ public class Pi
 	long totalSingleWorkerTime = 0;
 	long totalMultiWorkerTime = 0;
 
-	for(int i = 0; i <repetition; i ++){
+	for(int j = 0; j <repetition; j ++){
 		long singleWorkerTime = master.doRun(nThrows, 1);
-		long multiWorkerTime = master.doRun(nThrows / nWorkers, nWorkers);
 
 		totalSingleWorkerTime += singleWorkerTime;
-		totalMultiWorkerTime += multiWorkerTime;
 	}
 
-	System.out.println("Total tps 1 worker : " + totalSingleWorkerTime);
-	System.out.println("Total tps plusieurs worker : " + totalMultiWorkerTime);
-
-	double moySingleWorkerTime = totalSingleWorkerTime / repetition;
-	System.out.println("Temps moyen pour 1 processeur: " + moySingleWorkerTime);
-
-	double moyMultiWorkerTime = totalMultiWorkerTime / repetition;
-	System.out.println("Temps moyen pour " + nWorkers + " processeur: " + moyMultiWorkerTime);
-
-	double speedup = (double) moySingleWorkerTime/ moyMultiWorkerTime;
-	System.out.println("Speedup : " + speedup);
-
-	try (FileWriter fileWriter = new FileWriter("result_pi.txt", true);
-	PrintWriter printWriter = new PrintWriter(fileWriter)){
-		printWriter.printf("Speedup: " + speedup +", Temps 1 worker: " + moySingleWorkerTime + ", Temps avec " + nWorkers +" worker: "+ moyMultiWorkerTime + "\n \n");
-	} catch(IOException e){
-		e.printStackTrace();
+	for (int nworkers = 1; nworkers <=nWorkers; nworkers +=2){
+		for(int j = 0; j <repetition; j ++){
+			long multiWorkerTime = master.doRun(nThrows / nworkers, nworkers);
+	
+			totalMultiWorkerTime += multiWorkerTime;
+		}
+	
+		System.out.println("Total tps 1 worker : " + totalSingleWorkerTime);
+		System.out.println("Total tps plusieurs worker : " + totalMultiWorkerTime);
+	
+		double moySingleWorkerTime = totalSingleWorkerTime / repetition;
+		System.out.println("Temps moyen pour 1 processeur: " + moySingleWorkerTime);
+	
+		double moyMultiWorkerTime = totalMultiWorkerTime / repetition;
+		System.out.println("Temps moyen pour " + nWorkers + " processeur: " + moyMultiWorkerTime);
+	
+		double speedup = (double) moySingleWorkerTime/ moyMultiWorkerTime;
+		System.out.println("Speedup : " + speedup);
+	
+		try (FileWriter fileWriter = new FileWriter("result_pi.txt", true);
+		PrintWriter printWriter = new PrintWriter(fileWriter)){
+			printWriter.printf("Speedup: " + speedup +", Temps 1 worker: " + moySingleWorkerTime + ", Temps avec " + nWorkers +" worker: "+ moyMultiWorkerTime + "\n \n");
+		} catch(IOException e){
+			e.printStackTrace();
+		}
 	}
+
+	
     }
 }
 
