@@ -36,7 +36,7 @@ public class Pi
 
 	for(int i = 0; i <repetition; i ++){
 		long singleWorkerTime = master.doRun(nThrows, 1);
-		long multiWorkerTime = master.doRun(nThrows, nWorkers);
+		long multiWorkerTime = master.doRun(nThrows / nWorkers, nWorkers);
 
 		totalSingleWorkerTime += singleWorkerTime;
 		totalMultiWorkerTime += multiWorkerTime;
@@ -56,7 +56,7 @@ public class Pi
 
 	try (FileWriter fileWriter = new FileWriter("result_pi.txt", true);
 	PrintWriter printWriter = new PrintWriter(fileWriter)){
-		printWriter.printf("Speedup: " + speedup +", Temps 1 worker: " + moySingleWorkerTime + ", Temps avec " + nWorkers +" worker: "+ moyMultiWorkerTime + "\n");
+		printWriter.printf("Speedup: " + speedup +", Temps 1 worker: " + moySingleWorkerTime + ", Temps avec " + nWorkers +" worker: "+ moyMultiWorkerTime + "\n \n");
 	} catch(IOException e){
 		e.printStackTrace();
 	}
