@@ -108,13 +108,6 @@ class Master {
 	System.out.println("Available processors: " + numWorkers);
 	System.out.println("Time Duration (ms): " + duration + "\n");
 
-	try (FileWriter fileWriter = new FileWriter("result_pi.txt", true);
-	PrintWriter printWriter = new PrintWriter(fileWriter)){
-		printWriter.printf("Erreur relative: %.6f, nthrows: %d, nombre processus: %d, temps : %dms%n", errRelative, totalCount, numWorkers, duration);
-	} catch(IOException e){
-		e.printStackTrace();
-	}
-
 	exec.shutdown();
 	return duration;
     }
