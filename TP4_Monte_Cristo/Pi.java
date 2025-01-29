@@ -20,7 +20,6 @@ public class Pi
 {
     public static void main(String[] args) throws Exception 
     {
-	long total=0;
 	Scanner scanner = new Scanner(System.in);
 
 	System.out.println("enter the number of workers");
@@ -31,18 +30,33 @@ public class Pi
 
 	Master master = new Master();
 
-	long singleWorkerTime = master.doRun(nThrows, 1);
-	System.out.println("Temps pour 1 processeur: " + singleWorkerTime);
+	int repetition = 10;
+	long totalSingleWorkerTime = 0;
+	long totalMultiWorkerTime = 0;
 
-	long multiWorkerTime = master.doRun(nThrows, nWorkers);
-	System.out.println("Temps pour"+ nWorkers + "processeur: " + singleWorkerTime);
+	for(int i = 0; i <repetition; i ++){
+		long singleWorkerTime = master.doRun(nThrows, 1);
+		long multiWorkerTime = master.doRun(nThrows, nWorkers);
 
-	double speedup = (double) singleWorkerTime/multiWorkerTime;
+		totalSingleWorkerTime += singleWorkerTime;
+		totalMultiWorkerTime += multiWorkerTime;
+	}
+
+	System.out.println("Total tps 1 worker : " + totalSingleWorkerTime);
+	System.out.println("Total tps plusieurs worker : " + totalMultiWorkerTime);
+
+	double moySingleWorkerTime = totalSingleWorkerTime / repetition;
+	System.out.println("Temps moyen pour 1 processeur: " + moySingleWorkerTime);
+
+	double moyMultiWorkerTime = totalMultiWorkerTime / repetition;
+	System.out.println("Temps moyen pour " + nWorkers + " processeur: " + moyMultiWorkerTime);
+
+	double speedup = (double) moySingleWorkerTime/ moyMultiWorkerTime;
 	System.out.println("Speedup : " + speedup);
 
 	try (FileWriter fileWriter = new FileWriter("result_pi.txt", true);
 	PrintWriter printWriter = new PrintWriter(fileWriter)){
-		printWriter.printf("Speedup: %.2f, Temps 1 worker: %dms, Temps avec %d worker: %dms%n", speedup, singleWorkerTime, nWorkers, multiWorkerTime);
+		printWriter.printf("Speedup: " + speedup +", Temps 1 worker: " + moySingleWorkerTime + ", Temps avec " + nWorkers +" worker: "+ moyMultiWorkerTime + "\n");
 	} catch(IOException e){
 		e.printStackTrace();
 	}
@@ -102,7 +116,7 @@ class Master {
 	}
 
 	exec.shutdown();
-	return total;
+	return duration;
     }
 }
 
