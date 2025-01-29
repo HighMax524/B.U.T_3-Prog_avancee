@@ -1,4 +1,4 @@
-package TP4_Monte_Cristo;
+package TP4_Monte_Carlo;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
