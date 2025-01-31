@@ -1,5 +1,5 @@
 // Estimate the value of Pi using Monte-Carlo Method, using parallel program
-package TP4_Monte_Cristo;
+package TP4_Monte_Carlo;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

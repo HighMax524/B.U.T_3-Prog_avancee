@@ -1,4 +1,4 @@
-package TP4_Monte_Cristo;
+package TP4_Monte_Carlo;
 
 import java.util.ArrayList;
 import java.util.List;
