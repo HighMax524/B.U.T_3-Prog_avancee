@@ -39,7 +39,7 @@ public class MasterSocket {
 	   ioE.printStackTrace();
 	}
 	
-	for (int i=0; i<numWorkers; i++){
+	/*for (int i=0; i<numWorkers; i++){
 	    System.out.println("Enter worker"+ i +" port : ");
 	    try{
 		s = bufferRead.readLine();
@@ -48,7 +48,7 @@ public class MasterSocket {
 	    catch(IOException ioE){
 		ioE.printStackTrace();
 	    }
-	}
+	}*/
 
        //create worker's socket
        for(int i = 0 ; i < numWorkers ; i++) {
@@ -99,6 +99,7 @@ public class MasterSocket {
 
 	   System.out.println("\n Repeat computation (y/N): ");
 	   try{
+		   total = 0;
 	       message_repeat = bufferRead.readLine();
 	       System.out.println(message_repeat);
 	   }
