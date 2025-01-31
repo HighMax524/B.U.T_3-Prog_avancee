@@ -36,6 +36,9 @@ public class WorkerSocket {
             if (!(str.equals("END"))){
                 System.out.println("Server receives totalCount = " +  str);
                 str2 = bRead.readLine();
+                if (str2 == null || str2.isEmpty()){
+                    System.err.println("Server receives empty string");
+                }
                 System.out.println("Server receives numberWorkers = " +  str2);
 
                 System.out.println("-------------------------------------------");

@@ -17,7 +17,7 @@ public class MasterSocket {
     public static void main(String[] args) throws Exception {
 
 	// MC parameters
-	int totalCount = 16000000; // total number of throws on a Worker
+	int totalCount = 1000000; // total number of throws on a Worker
 	int total = 0; // total number of throws inside quarter of disk
 	double pi; 
 

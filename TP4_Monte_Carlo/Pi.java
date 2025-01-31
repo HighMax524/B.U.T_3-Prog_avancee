@@ -40,7 +40,7 @@ public class Pi
 		totalSingleWorkerTime += singleWorkerTime;
 	}
 
-	double moySingleWorkerTime = totalSingleWorkerTime / repetition;
+	double moySingleWorkerTime = (double) totalSingleWorkerTime / repetition;
 		System.out.println("Temps moyen pour 1 processeur: " + moySingleWorkerTime);
 
 	try (FileWriter fileWriter = new FileWriter("result_pi.txt", false);
@@ -51,6 +51,8 @@ public class Pi
 		}
 
 	for (int nworkersCours = 2; nworkersCours <= nWorkers; nworkersCours +=2){
+		totalMultiWorkerTime = 0;
+
 		for(int j = 0; j <repetition; j ++){
 			long multiWorkerTime = master.doRun(nThrows / nworkersCours, nworkersCours);
 
@@ -61,10 +63,10 @@ public class Pi
 		System.out.println("Total tps plusieurs worker : " + totalMultiWorkerTime);
 
 
-		double moyMultiWorkerTime = totalMultiWorkerTime / repetition;
+		double moyMultiWorkerTime = (double)totalMultiWorkerTime / repetition;
 		System.out.println("Temps moyen pour " + nworkersCours + " processeur: " + moyMultiWorkerTime);
 
-		double speedup = (double) moySingleWorkerTime/ moyMultiWorkerTime;
+		double speedup = moySingleWorkerTime/ moyMultiWorkerTime;
 		System.out.println("Speedup : " + speedup);
 
 		try (FileWriter fileWriter = new FileWriter("result_pi.txt", true);
