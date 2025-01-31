@@ -1,4 +1,6 @@
 package TP4_MC_Distibue;
+import TP4_Monte_Cristo.Master;
+
 import java.io.*;
 import java.net.*;
 /**
@@ -27,18 +29,25 @@ public class WorkerSocket {
         // PrintWriter pWrite for writing message to Master
         PrintWriter pWrite = new PrintWriter(new BufferedWriter(new OutputStreamWriter(soc.getOutputStream())), true);
 	String str;
+    String str2;
         while (isRunning) {
-	    str = bRead.readLine();          // read message from Master
-	    if (!(str.equals("END"))){
-		System.out.println("Server receives totalCount = " +  str);
-		
-		// compute
-		System.out.println("TODO : compute Monte Carlo and send total");
+            long total = 0;
+            str = bRead.readLine();          // read message from Master
+            if (!(str.equals("END"))){
+                System.out.println("Server receives totalCount = " +  str);
+                str2 = bRead.readLine();
+                System.out.println("Server receives numberWorkers = " +  str2);
 
-	        pWrite.println(str);         // send number of points in quarter of disk
-	    }else{
-		isRunning=false;
-	    }	    
+                System.out.println("-------------------------------------------");
+                total = new Master().doRun(Integer.parseInt(str), Integer.parseInt(str2));
+                System.out.println("total= " +  total);
+
+                System.out.println("-------------------------------------------");
+
+                pWrite.println(total);         // send number of points in quarter of disk
+            }else{
+                isRunning=false;
+            }
         }
         bRead.close();
         pWrite.close();
