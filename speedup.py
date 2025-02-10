@@ -26,7 +26,8 @@ else:
     plt.plot(nworkers_values, speedup_values, marker='o', linestyle='-', label="speedup")
 
     max_workers = max(nworkers_values) if nworkers_values else 1
-    plt.plot([0, max_workers], [0, max_workers], 'r--', label="sp=p")
+    plt.plot([1, max_workers], [1, max_workers], 'r--', label="sp=p")
+
 
     plt.xlabel("Nombre de processus")
     plt.ylabel("SP")
