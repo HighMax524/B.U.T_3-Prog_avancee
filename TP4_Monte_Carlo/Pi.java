@@ -50,9 +50,9 @@ public class Pi
 			e.printStackTrace();
 		}
 
-	for (int nworkersCours = 2; nworkersCours <= nWorkers; nworkersCours +=2){
+	for (int nworkersCours = 2; nworkersCours <= nWorkers; nworkersCours ++){
 		for(int j = 0; j <repetition; j ++){
-			long multiWorkerTime = master.doRun(nThrows / nworkersCours, nworkersCours);
+			long multiWorkerTime = master.doRun(nThrows / nworkersCours , nworkersCours);
 	
 			totalMultiWorkerTime += multiWorkerTime;
 		}

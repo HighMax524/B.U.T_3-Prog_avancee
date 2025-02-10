@@ -40,6 +40,6 @@ else:
 
     plt.xlabel("Nombre de processus")
     plt.ylabel("SP")
-    plt.title("Speedup du programme Pi")
+    plt.title("Scalabilité faible du programme Pi")
     plt.grid()
     plt.show()
