@@ -73,8 +73,8 @@ public class Pi
 		} catch(IOException e){
 			e.printStackTrace();
 		}
+		totalMultiWorkerTime = 0;
 	}
-
 	
     }
 }
@@ -116,7 +116,7 @@ class Master {
 	long duration = stopTime - startTime;
 
 	System.out.println("Approx value: : " + pi );
-	System.out.println("Difference to exact value of pi: " + (pi - Math.PI));
+	System.out.println("Difference to exact value of pi: " + Math.abs((pi - Math.PI)));
 	System.out.println("% Error: " + (pi - Math.PI) / Math.PI * 100 + " %");
 	System.out.println("Error: " + errRelative +"\n");
 
