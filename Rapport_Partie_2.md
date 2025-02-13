@@ -16,10 +16,8 @@ Un algorithme de Monte-Carlo est un algorithme basé sur de l'aléatoire et dont
 
 La méthode de Monte-Carlo a été inventée en 1947 par [Nicholas Metropolis](https://fr.wikipedia.org/wiki/Nicholas_Metropolis) et faisait allusion au jeu de hasard pratiqué dans le casino de Monte-Carlo.
 
-De nos jours, ces méthodes de Monte-Carlo sont souvent utilisées pour le calcul d'intégrales de dimension supérieure à 1.
+De nos jours, ces méthodes de Monte-Carlo sont souvent utilisées pour le calcul d'intégrales de dimension supérieure à 1 Mais égalemment pour introduire une approche statistique du risque dans une décision financière.
 
-Cette méthode est aussi utilisé pour introduire une approche statistique du risque dans une décision financière.
+Elle peut être égalemment être utilisé pour plein d'autre méthode de calcul tel que le calcul de la valeur de coup dans certains jeu (Go, échec), mais aussi pour calculer la probabilité de la performance en bourse.
 
-Elle peut être égalemment être utilisé pour plein d'autre méthode de calcul.
-
-Dans ce rapport nous allons montré son fonctionnement pour le calcul de π.
+Dans ce rapport nous allons montré comment fonctionne cet algorithme a travers le calcul de la valeur π.
