@@ -43,16 +43,16 @@ public class Pi
 	double moySingleWorkerTime = totalSingleWorkerTime / repetition;
 		System.out.println("Temps moyen pour 1 processeur: " + moySingleWorkerTime);
 
-	try (FileWriter fileWriter = new FileWriter("result_pi.txt", true);
+	try (FileWriter fileWriter = new FileWriter("result_pi.txt", false);
 		PrintWriter printWriter = new PrintWriter(fileWriter)){
 			printWriter.printf("Speedup: " + 1 +", Temps 1 worker: " + moySingleWorkerTime + "\n \n");
 		} catch(IOException e){
 			e.printStackTrace();
 		}
 
-	for (int nworkersCours = 2; nworkersCours <= nWorkers; nworkersCours +=2){
+	for (int nworkersCours = 2; nworkersCours <= nWorkers; nworkersCours ++){
 		for(int j = 0; j <repetition; j ++){
-			long multiWorkerTime = master.doRun(nThrows / nworkersCours, nworkersCours);
+			long multiWorkerTime = master.doRun(nThrows / nworkersCours , nworkersCours);
 	
 			totalMultiWorkerTime += multiWorkerTime;
 		}
@@ -73,8 +73,8 @@ public class Pi
 		} catch(IOException e){
 			e.printStackTrace();
 		}
+		totalMultiWorkerTime = 0;
 	}
-
 	
     }
 }
@@ -116,7 +116,7 @@ class Master {
 	long duration = stopTime - startTime;
 
 	System.out.println("Approx value: : " + pi );
-	System.out.println("Difference to exact value of pi: " + (pi - Math.PI));
+	System.out.println("Difference to exact value of pi: " + Math.abs((pi - Math.PI)));
 	System.out.println("% Error: " + (pi - Math.PI) / Math.PI * 100 + " %");
 	System.out.println("Error: " + errRelative +"\n");
 
