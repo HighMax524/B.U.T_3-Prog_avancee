@@ -3,6 +3,7 @@ import TP4_Monte_Carlo.Master;
 
 import java.io.*;
 import java.net.*;
+import java.util.Random;
 /**
  * Worker is a server. It computes PI by Monte Carlo method and sends 
  * the result to Master.
@@ -28,26 +29,29 @@ public class WorkerSocket {
 
         // PrintWriter pWrite for writing message to Master
         PrintWriter pWrite = new PrintWriter(new BufferedWriter(new OutputStreamWriter(soc.getOutputStream())), true);
+
 	String str;
-    String str2;
         while (isRunning) {
-            long total = 0;
             str = bRead.readLine();          // read message from Master
+            System.out.println(str);
+            int totalCount = Integer.parseInt(str);
+
             if (!(str.equals("END"))){
+
                 System.out.println("Server receives totalCount = " +  str);
-                str2 = bRead.readLine();
-                if (str2 == null || str2.isEmpty()){
-                    System.err.println("Server receives empty string");
+
+                long circleCount = 0;
+                Random prng = new Random ();
+                for (int j = 0; j < Integer.parseInt(str); j++)
+                {
+                    double x = prng.nextDouble();
+                    double y = prng.nextDouble();
+                    if ((x * x + y * y) < 1)  ++circleCount;
                 }
-                System.out.println("Server receives numberWorkers = " +  str2);
 
-                System.out.println("-------------------------------------------");
-                total = new Master().doRun(Integer.parseInt(str), Integer.parseInt(str2));
-                System.out.println("total= " +  total);
 
-                System.out.println("-------------------------------------------");
+                pWrite.println(circleCount);         // send number of points in quarter of disk
 
-                pWrite.println(total);         // send number of points in quarter of disk
             }else{
                 isRunning=false;
             }
