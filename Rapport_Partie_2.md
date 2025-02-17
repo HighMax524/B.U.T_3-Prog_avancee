@@ -20,4 +20,8 @@ De nos jours, ces méthodes de Monte-Carlo sont souvent utilisées pour le calcu
 
 Elle peut être égalemment être utilisé pour plein d'autre méthode de calcul tel que le calcul de la valeur de coup dans certains jeu (Go, échec), mais aussi pour calculer la probabilité de la performance en bourse.
 
-Dans ce rapport nous allons montré comment fonctionne cet algorithme a travers le calcul de la valeur π.
+Dans ce rapport nous allons montré comment fonctionne cet algorithme a travers le calcul de la valeur π, comment peut-il être implementer en java et nous allons égalemment effectuer le calcul de ses perforamances.
+
+### II. Algorithme
+
+Nous allons a présent observer le fonctionnement de l'algorithme de Monte-Carlo à travers le calcul de π.
