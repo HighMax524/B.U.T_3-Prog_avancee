@@ -45,7 +45,7 @@ Ainsi, on peut approcher π par :\
 P = $\frac{π}{4}$ ≃ $\frac{\text{ncible}}{\text{ntotal}}$ => π ≃ 4 * $\frac{\text{ncible}}{\text{ntotal}}$ 
 
 #### Pseudo code de l'algorithme de base 
-```
+``` java
 ncible = 0
 for (p = 0; ntotal > 0; ntotal--){
     x_p, y_p = random.random(), random.random(); // Géneration d'un point aléatoire entre 0 et 1
@@ -78,11 +78,13 @@ On obtient ainsi une décomposition comme suit :
     - Comptage des points dans le quart de cercle
 - Calcul de π
 
-Suite a cette décomposition on peut modifier le code de l'algorithme de Monte-Carlo précedent pour le calcul de π afin de le rendre parallèle.
-```
+On peut observer ici, une section critique qui est ncible. En effet, plusieurs tâches peuvent essayer d'incrémenter ncible en même temps. Il faut donc utiliser un verrou mutex (avec la méthode synchronized) pour éviter les problèmes d'&ccèes en simultané.
+
+Suite a ces analyses, on on peut modifier le code de l'algorithme de Monte-Carlo précedent afin de le rendre parallèle.
+``` java
 ncible = 0
 parallel for (p = 0; ntotal > 0; ntotal--){
-    x_p, y_p = random.random(), random.random(); // Géneration d'un point aléatoire entre 0 et 1
+    x_p, y_p = Math.random(), Math.random(); // Géneration d'un point aléatoire entre 0 et 1
     synchronized(ncible){
         if (x_p**2 + y_p**2 <= 1){  // Si la distance du point est inférieur ou égale à 1 donc dans le quart de cercle
             ncible ++;
@@ -96,3 +98,41 @@ Ainsi, si on veut améliorer cet algorithme, il faudrait compter les points ne t
 Cependant, il est possible de faire mieux en utilisant un autre Paradigme de parallélisme.
 
 ### Master/Worker
+Ce paradigme fonctionne de la manière suivante:
+- Un maître qui:
+    - execute le code principal
+    - Intialise les travailleurs
+    - distribue les tâches aux travailleurs.
+    - attend les résultats
+  
+
+- Des workers qui:
+    - attendent les tâches
+    - exécutent les tâches
+    - renvoient les résultats au maître
+
+Il s'agit ainsi d'un paradigme de parallélisme de tâches simple à mettre en place avec une communication de 1 à tous. Mais qui présente néanmoins quelques inconvénients qui sont la distribution de 1 vers tous et la centralisation des résultats.
+
+#### pseudo code de l'algorithme de Monte-Carlo en Master/Worker
+``` java
+ncible = 0
+ncibleWorker = [0 * nbWorker]
+npointWorker = ntotal / nbWorker
+parallel for (worker = 0; worker < nbWorker; worker++){
+    nciblesWorker[worker] = cibleWorker(npointWorker);
+}
+cible = sum(nciblesWorker);
+pi = 4 * n_circle / ntotal;
+
+function cibleWorker(npointWorker){
+    ncibleWorker = 0
+    for (p = 0; npointWorker > 0; npointWorker--){
+        x_p, y_p = Math.random(), Math.random(); // Géneration d'un point aléatoire entre 0 et 1
+        if (x_p**2 + y_p**2 <= 1){  // Si la distance du point est inférieur ou égale à 1 donc dans le quart de cercle
+            ncibleWorker ++;
+        }
+    }
+    return ncibleWorker;
+}
+```
+En conclusion, l'algorithme Master/Worker permet de paralléliser efficacement le calcul de π en répartissant les tâches entre plusieurs travailleurs, ce qui améliore les performances globales tout en simplifiant la gestion des tâches et des résultats.
