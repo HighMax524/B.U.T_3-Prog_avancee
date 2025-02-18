@@ -142,7 +142,7 @@ En conclusion, l'algorithme Master/Worker permet de paralléliser efficacement l
 Maintenant, nous allons voir comment nous avons implémenté ces algorithmes en Java au cours de ce TP.
 
 Pour commencer, nous avons récuperer 2 codes sources :
-- **Assignement102.java** qui est le code source de base de l'algorithme de Monte-Carlo pour le calcul de πven itération parallèle
+- **Assignement102.java** qui est le code source de base de l'algorithme de Monte-Carlo pour le calcul de π en itération parallèle
 - **Pi.java** qui est le code source de base de l'algorithme de Monte-Carlo pour le calcul de π en Master/Worker
 
 ###### Assignement102.java à été écrit par [Karthik Jain](https://www.krthkj.com) et Pi.java à été écrit par le [Dr. Steve Kautz](https://faculty.sites.iastate.edu/smkautz/)
