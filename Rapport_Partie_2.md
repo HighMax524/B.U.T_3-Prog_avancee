@@ -1,6 +1,6 @@
-## Rapport TP4
+# Rapport TP4
 
-### Introduction
+## Introduction
 
 Dans ce TP, le but était d'implémenter un algorithme de Monte-Carlo afin de calculer la valeur de π. Pour ce faire, nous avons exploité le parallélisme en mémoire distribuée et en mémoire partagée.
 
@@ -8,9 +8,9 @@ Le répertoire `TP4_Monte_Carlo` contient les différents codes mis en place pou
 
 ###### Ce rapport a été écrit avec l'aide d'une IA, notamment pour la mise en page et la reformulation de certaines parties afin de faciliter la lecture et la compréhension du document.
 
-### I. Généralités
+## I. Généralités
 
-#### Qu'est-ce qu'un algorithme de Monte-Carlo ?
+### Qu'est-ce qu'un algorithme de Monte-Carlo ?
 
 Un algorithme de Monte-Carlo est un algorithme basé sur de l'aléatoire et dont le temps d'exécution est déterministe. Il s'agit donc d'un algorithme utilisant une source aléatoire mais dont le temps d'exécution est connu à l'avance. L'intérêt de ce type d'algorithme est d'obtenir un résultat de façon rapide tout en ayant une probabilité d'échec faible.
 
@@ -22,7 +22,7 @@ Elle peut être égalemment être utilisé pour plein d'autre méthode de calcul
 
 Dans ce rapport nous allons montré comment fonctionne cet algorithme a travers le calcul de la valeur π, comment peut-il être implementer en java et nous allons égalemment effectuer le calcul de ses perforamances.
 
-### II. Algorithme
+## II. Algorithme
 
 ##### Nous allons a présent montrer l'appliction de l'algorithme de Monte-Carlo à travers le calcul de π.
 
@@ -44,7 +44,7 @@ La probabilité P(X) doit être approché par le nombre de points dans le quart 
 Ainsi, on peut approcher π par :\
 P = $\frac{π}{4}$ ≃ $\frac{\text{ncible}}{\text{ntotal}}$ => π ≃ 4 * $\frac{\text{ncible}}{\text{ntotal}}$ 
 
-##### Pseudo code de l'algorithme de base 
+#### Pseudo code de l'algorithme de base 
 ```
 ncible = 0
 for (p = 0; ntotal > 0; ntotal--){
@@ -57,5 +57,42 @@ pi = 4 * ncible / ntotal;
 
 ```
 
-### III. Parallélisation
+## III. Parallélisation
 
+Nous allons a présent voir différent parallélisation de l'algorithme de Monte-Carlo pour le calcul de π.
+
+### Itération parallèle
+
+Tout d'abord on commence par choisir un modèle de parallélisation. Dans notre cas, nous avons choisi un modèle de parallélisme par tâches.\
+Les différentes tâche sont les suivantes :
+- Génération de points aléatoires
+- Calcul de π
+
+De plus, on peut découper La 1ère tâche en plusieurs sous-tâches pour plus de rapidité :
+- Génération de points aléatoires
+- Comptage des points dans le quart de cercle
+
+On obtient ainsi une décomposition comme suit :
+- Génération de points aléatoires
+    - Génération de points aléatoires
+    - Comptage des points dans le quart de cercle
+- Calcul de π
+
+Suite a cette décomposition on peut modifier le code de l'algorithme de Monte-Carlo précedent pour le calcul de π afin de le rendre parallèle.
+```
+ncible = 0
+parallel for (p = 0; ntotal > 0; ntotal--){
+    x_p, y_p = random.random(), random.random(); // Géneration d'un point aléatoire entre 0 et 1
+    synchronized(ncible){
+        if (x_p**2 + y_p**2 <= 1){  // Si la distance du point est inférieur ou égale à 1 donc dans le quart de cercle
+            ncible ++;
+        }
+    }
+}
+```
+Avec cette modification, on obtient quelque chose de moins efficace qu'une boucle for classique car 75% des Threads (correspondant a ceux des points dans le quart de cercle) vont être bloqués par le verrou mutex.\
+Ainsi, si on veut améliorer cet algorithme, il faudrait compter les points ne tombant pas dans le quart de cercle (representant donc 25% des points) et les soustraire à ntotal.
+
+Cependant, il est possible de faire mieux en utilisant un autre Paradigme de parallélisme.
+
+### Master/Worker
