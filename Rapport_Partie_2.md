@@ -47,13 +47,13 @@ P = $\frac{π}{4}$ ≃ $\frac{\text{ncible}}{\text{ntotal}}$ => π ≃ 4 * $\fra
 ##### Pseudo code de l'algorithme de base 
 ```
 ncible = 0
-    for (p = 0; ntotal > 0; ntotal--){
-        x_p, y_p = random.random(), random.random(); // Géneration d'un point aléatoire entre 0 et 1
-        if (x_p**2 + y_p**2 <= 1){  // Si la distance du point est inférieur ou égale à 1 donc dans le quart de cercle
-            ncible ++;
-        }
+for (p = 0; ntotal > 0; ntotal--){
+    x_p, y_p = random.random(), random.random(); // Géneration d'un point aléatoire entre 0 et 1
+    if (x_p**2 + y_p**2 <= 1){  // Si la distance du point est inférieur ou égale à 1 donc dans le quart de cercle
+        ncible ++;
     }
-    pi = 4 * ncible / ntotal;
+}
+pi = 4 * ncible / ntotal;
 
 ```
 
