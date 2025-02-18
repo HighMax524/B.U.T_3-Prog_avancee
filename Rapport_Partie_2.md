@@ -32,11 +32,11 @@ Pour calculer π avec la méthode de Monte-Carlo, on commence par tracer un carr
 On effectue ensuite le tirage d'un grand nombre de points aléatoires à l'intérieur de ce carré de côté 1.\
 <img src="res/Schema1_MonteCarlo_avec_points.png" alt="Schéma montrant un carré de côté 1 avec un quart de cercle de rayon 1 à l'intérieur rempli de points" width="350"/>
 
-Ainsi, la probabilité que le point soit à l'intérieur du quart de cercle est égale à l'aire du quart de cercle divisée par l'aire du carré est donnée par :
+Ainsi, la probabilité que le point soit à l'intérieur du quart de cercle est égale à :
 
 $$ \frac{\text{Aire du quart de cercle}}{\text{Aire du carré}} = \frac{\frac{1}{4} \pi r^2}{r^2} $$
 
-sachant que l'aire du quart de cercle est égale à $\frac{1}{4} \pi r^2$ et que l'aire du carré est égale à 1, on obtient ainsi que P(point dans le quart de cercle) qui est aussi P(distance du points <= 1) est égale à :
+sachant que l'aire du quart de cercle est égale à $\frac{1}{4} \pi r^2$ et que l'aire du carré est égale à $r^2$ soit 1, on obtient ainsi que P(point dans le quart de cercle) qui est aussi P(distance du points <= 1) est égale à :
 
 $$ \frac{\frac{1}{4} \pi r^2}{r^2} =  \frac{\pi}{4}$$
 
