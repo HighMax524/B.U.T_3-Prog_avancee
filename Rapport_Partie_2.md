@@ -40,6 +40,6 @@ sachant que l'aire du quart de cercle est égale à $\frac{1}{4} \pi r^2$ et que
 
 $$ \frac{\frac{1}{4} \pi r^2}{r^2} =  \frac{\pi}{4}$$
 
-La probabilité P(X) doit être approché par le nombre de points dans le quart de cercle divisé par le nombre total de points ($ \frac{\text{ncible}}{\text{ntotal}}$) avec ntotal un grand nombre pour plus d'exactitude.\
+La probabilité P(X) doit être approché par le nombre de points dans le quart de cercle divisé par le nombre total de points ($\frac{\text{ncible}}{\text{ntotal}}$) avec ntotal un grand nombre pour plus d'exactitude.\
 Ainsi, on peut approcher π par :\
-P = $ \frac{π}{4} $ ≃ $ \frac{\text{ncible}}{\text{ntotal}}$ => π ≃ 4 * $ \frac{\text{ncible}}{\text{ntotal}}$ 
+P = $\frac{π}{4}$ ≃ $\frac{\text{ncible}}{\text{ntotal}}$ => π ≃ 4 * $\frac{\text{ncible}}{\text{ntotal}}$ 
