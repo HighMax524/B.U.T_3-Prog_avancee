@@ -43,3 +43,19 @@ $$ \frac{\frac{1}{4} \pi r^2}{r^2} =  \frac{\pi}{4}$$
 La probabilité P(X) doit être approché par le nombre de points dans le quart de cercle divisé par le nombre total de points ($\frac{\text{ncible}}{\text{ntotal}}$) avec ntotal un grand nombre pour plus d'exactitude.\
 Ainsi, on peut approcher π par :\
 P = $\frac{π}{4}$ ≃ $\frac{\text{ncible}}{\text{ntotal}}$ => π ≃ 4 * $\frac{\text{ncible}}{\text{ntotal}}$ 
+
+##### Pseudo code de l'algorithme de base 
+```
+ncible = 0
+    for (p = 0; ntotal > 0; ntotal--){
+        x_p, y_p = random.random(), random.random(); // Géneration d'un point aléatoire entre 0 et 1
+        if (x_p**2 + y_p**2 <= 1){  // Si la distance du point est inférieur ou égale à 1 donc dans le quart de cercle
+            ncible ++;
+        }
+    }
+    pi = 4 * ncible / ntotal;
+
+```
+
+### III. Parallélisation
+
