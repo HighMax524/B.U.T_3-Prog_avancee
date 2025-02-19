@@ -1,5 +1,16 @@
 # Rapport TP4
 
+
+## Table des matières
+- ### [Introduction](#introduction)
+- ### [I. Généralités](#i-généralités)
+- ### [II. Algorithme](#ii-algorithme)
+- ### [III. Parallélisation](#iii-parallélisation)
+  - #### [Itération parallèle](#itération-parallèle)
+  - #### [Master/Worker](#masterworker)
+- ### [IV. Implémentation](#iv-implémentation)
+- ### [V. Mesures de performances](#v-mesures-de-performances)
+
 ## Introduction
 
 Dans ce TP, le but était d'implémenter un algorithme de Monte-Carlo afin de calculer la valeur de π. Pour ce faire, nous avons exploité le parallélisme en mémoire distribuée et en mémoire partagée.
