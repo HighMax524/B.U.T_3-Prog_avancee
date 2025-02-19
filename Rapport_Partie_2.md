@@ -2,14 +2,14 @@
 
 
 ## Table des matières
-- ### [Introduction](#introduction)
-- ### [I. Généralités](#i-généralités)
-- ### [II. Algorithme](#ii-algorithme)
-- ### [III. Parallélisation](#iii-parallélisation)
-  - #### [Itération parallèle](#itération-parallèle)
-  - #### [Master/Worker](#masterworker)
-- ### [IV. Implémentation](#iv-implémentation)
-- ### [V. Mesures de performances](#v-mesures-de-performances)
+- [Introduction](#introduction)
+- [I. Généralités](#i-généralités)
+- [II. Algorithme](#ii-algorithme)
+- [III. Parallélisation](#iii-parallélisation)
+  - [Itération parallèle](#itération-parallèle)
+  - [Master/Worker](#masterworker)
+- [IV. Implémentation](#iv-implémentation)
+- [V. Mesures de performances](#v-mesures-de-performances)
 
 ## Introduction
 
