@@ -233,3 +233,19 @@ De plus, nous avons modifié les codes afin que les deux programmes effectuent l
 Ensuite, pour chacun de ces codes, nous avons fait en sorte d'écrire les résultats dans un fichier texte **result_pi.txt**.
 
 Pour avoir des résultats plus précis, nous avons, pour chaque processus, éxecuter 10 fois le calcul de π afin de faire une moyenne du temps d'éxecution.
+
+Une fois ces calculs effectués, nous pouvons effectuer des tests de scalabilité.
+
+### Qu'est ce que la scalabilité ?
+La scalabilité correspond à la capacité d'un système à s'adapter à une augmentation de la charge de travail.\
+
+Pour évaluer cette scalabilité, il faut mesurer l'accelaration (ou speedup).
+
+Voici le calcul du speedup :\
+$$Speedup = \frac{\text{Temps d'éxecution pour 1 processus}}{\text{Temps d'éxecution pour n processus}}$$
+
+Le speedup idéal est linéaire, c'est à dire que si on double le nombre de processus, le temps d'éxecution doit 2 fois plus rapide.
+
+<img src="res/Schema_spedup.png" alt="Schéma représentant le fonctionnement du paradigme Master/Worker" width="428"/>
+
+On observe ainsi que l'objectif est d'atteindre un speedup qui se rapproche le plus possible de la droite idéale SP=P. Néanmoins il sera difficle de l'égalé étant donné qu'un écart va se créer au fur et à mesure dû à la communication entre les processus.
