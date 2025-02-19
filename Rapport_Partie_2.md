@@ -170,7 +170,7 @@ Pour **Assignement102**, nous avions :
 - Une classe **PiMonteCarlo** qui est la classe principale et qui encapsule le calcul de π
 - Une classe interne **MonteCarlo** qui implémente Runnable, elle permet de génerer un point aléatoire et vérfie si sa distance est inferieur à 1.
 - Une classe **Assignement102** qui permet d'instancier PiMonteCarlo et affiche la valeur éstimée de π.
-###### Ajourer diagramme UML
+###### Ajouter diagramme UML
 
 Ce code utilise interface Runnable pour gérer l'exécution parallèle des calculs.
 Elle va créer un pool de threads avec un newWorkStealingPool afin d'optimiser l'utilisation des threads en les repartissant en fonction des coeurs disponibles sur la machine.
@@ -182,11 +182,32 @@ Et pour **Pi**, nous avions :
 - Une classe **Pi** qui execute le programme en appelant la méthode Master.doRun(50000,10) qui permet de lancer le calcul de π avec 50000 points et 10 travailleurs.
 - Une classe **Master** qui instance un certains nombre (fourni par l'utilisateur) de Workers reparti le nombre de lancer entre les workers et qui attend les résultats pour calculer π. 
 - Une classe **Worker** qui récupère le nombre de lancer, génere autant de point qu'il y a de lancer et renvoi le nombre de point dont la distance est inférieur à 1.
-###### Ajourer diagramme UML
+###### Ajouter diagramme UML
 
 Ce code utilise les interfaces Callable et Future de la bibliothèque API concurrent afin de gérer l’exécution parallèle des tâches.
 Elle utilise égalemment ExecutorService avec un FixedThreadPool pour gérer les threads efficacement.
 
+### Qu'est-ce qu'un Future?
+Un Future représente le résultat d'une opération effectuée de manière asynchrone.
 
-Pour ces 2 codes, on utilise égalemment la méthode System.currentTimeMillis() pour calculer le temps d'exécution que met le programme à calculer π. Cela nous permeyttra par la suite d'effectuer des mesures de performances afin de comparer lequel de ces 2 programmes est le plus efficace.
+Un Future permet de : 
+- Récupérer le résultat d'une opération asynchrone : **get()**
+- Vérifier si l'opération est terminée : **isDone()**
+- D'annuler l'opération : **cancel()**
+
+Pout implémenter l'interface Future, on peut utiliser un FutureTask afin de représenté une tâche qui peut être exécutée et récupérer son résultat.\
+Un FutureTask peut être utilisé pour encapsuler une Callable ou une Runnable et est éxecuté par un thread ou un ExecutorService afin de stocké le resultat d'un calcul asynchrone.
+
+Les Callable et Runnable sont des interfaces qui permettent d'éxecuté des tâches. La différence entre les deux est que Callable renvoi un résultat tandis que Runnable ne renvoi rien.
+
+### Mais qu'est-ce qu'un Executor ?
+Un Executor est un service de support pour les threads mais à un niveau plus élevé que la classe Thread. Ce service permet d'éxecuter des tâches de manière asynchrone en utilisant un pool de threads.
+
+Utiliser un ExecutorService permet de :
+- Réutiliser les threads
+- Gérer automatiquement le nombre optimal de threads avec la méthode **fixedThreadPool()**.
+- Facilité l'annulation des tâches avec l'aide d'un **Future**
+- Améliorer les performances.
+
+Pour ces 2 codes, on utilise égalemment la méthode System.currentTimeMillis() pour calculer le temps d'exécution que met le programme à calculer π. Cela nous permettra par la suite d'effectuer des mesures de performances afin de comparer lequel de ces 2 programmes est le plus efficace.
 ## V. Mesures de performances
