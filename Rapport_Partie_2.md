@@ -124,7 +124,7 @@ On a deux types de composants :
     - renvoient les résultats au maître
 
 Voici un schéma représentant le fonctionnemment de ce paradigme :\
-<img src="res/Diagramme_MasterWorker.png" alt="Schéma représentant le fonctionnement du paradigme Master/Worker" width="350"/>
+<img src="res/Diagramme_MasterWorker.png" alt="Schéma représentant le fonctionnement du paradigme Master/Worker" width="500"/>
 
 
 Cette architecture suit donc une approche de décomposition des tâches, dans laquelle un problème complexe est divisé en sous-tâches plus petites et plus gérables.
