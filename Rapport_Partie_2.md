@@ -217,12 +217,12 @@ Nous allons désormais analyser les performances de ces deux programmes afin d'o
 
 Pour cela, nous avons effectué des mesures de performances sur la machine ayant la configuration suivante : 
 - <u>**Processeur :**</u> Intel Core i7-9700 CPU 3GHz
-- <u>Nombre de coeurs :</u> 8
-- <u>Nombre de threads:</u> 8
-- <u>Mémoire RAM :</u> 32Go
-- <u>Cache :</u> 12 Mo
-- <u>Vitesse du bus:</u> 8GT/s (GigaTransfert)
-- <u>PDT (Puissance de dissipation thermique) :</u> 65W
+- <u>**Nombre de coeurs :**</u> 8
+- <u>**Nombre de threads:**</u> 8
+- <u>**Mémoire RAM :**</u> 32Go
+- <u>**Cache :**</u> 12 Mo
+- <u>**Vitesse du bus:**</u> 8GT/s (GigaTransfert)
+- <u>**PDT (Puissance de dissipation thermique) :**</u> 65W
 
 <u style="color:red">**ATTENTION :**</u> Les résultats présentés dans ce rapport seront différent en fonction de l'architecture de la machine utilisée.
 
