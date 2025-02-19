@@ -210,4 +210,26 @@ Utiliser un ExecutorService permet de :
 - Améliorer les performances.
 
 Pour ces 2 codes, on utilise égalemment la méthode System.currentTimeMillis() pour calculer le temps d'exécution que met le programme à calculer π. Cela nous permettra par la suite d'effectuer des mesures de performances afin de comparer lequel de ces 2 programmes est le plus efficace.
+
 ## V. Mesures de performances
+
+Nous allons désormais analyser les performances de ces deux programmes afin d'observer lequel de ces deux paradigme est le plus efficace pour le calcul de π.
+
+Pour cela, nous avons effectué des mesures de performances sur la machine ayant la configuration suivante : 
+- <u>**Processeur :**</u> Intel Core i7-9700 CPU 3GHz
+- <u>Nombre de coeurs :</u> 8
+- <u>Nombre de threads:</u> 8
+- <u>Mémoire RAM :</u> 32Go
+- <u>Cache :</u> 12 Mo
+- <u>Vitesse du bus:</u> 8GT/s (GigaTransfert)
+- <u>PDT (Puissance de dissipation thermique) :</u> 65W
+
+<u style="color:red">**ATTENTION :**</u> Les résultats présentés dans ce rapport seront différent en fonction de l'architecture de la machine utilisée.
+
+### Comment mesurer les performences ?
+Pour pouvoir mesurer les performances, le code contient, comme présenter précédemment, un appel à la méthode System.currentTimeMillis() avant et après l'exécution de la portion de code permettant de paralléliser le calcul de π\
+De plus, nous avons modifié les codes afin que les deux programmes effectuent le calcul de π avec un nombre de points définis par l'utilisateur mais égalemment que les deux codes renvoient les résultats de la même manière. 
+
+Ensuite, pour chacun de ces codes, nous avons fait en sorte d'écrire les résultats dans un fichier texte **result_pi.txt**.
+
+Pour avoir des résultats plus précis, nous avons, pour chaque processus, éxecuter 10 fois le calcul de π afin de faire une moyenne du temps d'éxecution.
