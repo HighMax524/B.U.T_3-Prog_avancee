@@ -241,11 +241,12 @@ La scalabilité correspond à la capacité d'un système à s'adapter à une aug
 
 Pour évaluer cette scalabilité, il faut mesurer l'accelaration (ou speedup).
 
-Voici le calcul du speedup :\
+Voici le calcul du speedup :
+
 $$Speedup = \frac{\text{Temps d'éxecution pour 1 processus}}{\text{Temps d'éxecution pour n processus}}$$
 
 Le speedup idéal est linéaire, c'est à dire que si on double le nombre de processus, le temps d'éxecution doit 2 fois plus rapide.
 
-<img src="res/Schema_spedup.png" alt="Schéma représentant le fonctionnement du paradigme Master/Worker" width="428"/>
+<img src="res/Schema_spedup.png" alt="Schéma représentant le speedup" width="428"/>
 
 On observe ainsi que l'objectif est d'atteindre un speedup qui se rapproche le plus possible de la droite idéale SP=P. Néanmoins il sera difficle de l'égalé étant donné qu'un écart va se créer au fur et à mesure dû à la communication entre les processus.
