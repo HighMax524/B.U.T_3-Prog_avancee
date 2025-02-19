@@ -98,7 +98,8 @@ Ainsi, si on veut améliorer cet algorithme, il faudrait compter les points ne t
 Cependant, il est possible de faire mieux en utilisant un autre Paradigme de parallélisme.
 
 ### Master/Worker
-Ce paradigme fonctionne de la manière suivante:
+Ce paradigme fonctionne de la manière suivante:\
+On a deux types de composants :
 - Un maître qui:
     - execute le code principal
     - Intialise les travailleurs
@@ -110,6 +111,9 @@ Ce paradigme fonctionne de la manière suivante:
     - attendent les tâches
     - exécutent les tâches
     - renvoient les résultats au maître
+
+
+Cette architecture suit donc une approche de décomposition des tâches, dans laquelle un problème complexe est divisé en sous-tâches plus petites et plus gérables.
 
 Il s'agit ainsi d'un paradigme de parallélisme de tâches simple à mettre en place avec une communication de 1 à tous. Mais qui présente néanmoins quelques inconvénients qui sont la distribution de 1 vers tous et la centralisation des résultats.
 
@@ -146,4 +150,7 @@ Pour commencer, nous avons récuperer 2 codes sources :
 - **Pi.java** qui est le code source de base de l'algorithme de Monte-Carlo pour le calcul de π en Master/Worker
 
 ###### Assignement102.java à été écrit par [Karthik Jain](https://www.krthkj.com) et Pi.java à été écrit par le [Dr. Steve Kautz](https://faculty.sites.iastate.edu/smkautz/)
+###### Ces codes sources ont été modifiés pour les besoins de ce TP
+
+
 ## V. Mesures de performances
