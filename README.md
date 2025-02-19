@@ -10,6 +10,6 @@ Voici la liste des différents TP réalisé :
 - **TP3 Bal** : Illustre le modèle producteur-consommateur en Java à travers la gestion d’une boîte aux lettres
 - **TP4 Monte Carlo distribué et partagé** :
 
-Vous trouverez plus de détails dans les 2 rapports suivants :
+Pour plus de détails, consultez les 2 rapports suivants :
 - [Rapport Partie 1](Rapport_Partie_1.md) : Rapport des 3 premiers TPs 
 - [Rapport Partie 2](Rapport_Partie_2.md) : Rapport du TP 4
