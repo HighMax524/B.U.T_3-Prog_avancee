@@ -250,3 +250,24 @@ Le speedup idéal est linéaire, c'est à dire que si on double le nombre de pro
 <img src="res/Schema_spedup.png" alt="Schéma représentant le speedup" width="428"/>
 
 On observe ainsi que l'objectif est d'atteindre un speedup qui se rapproche le plus possible de la droite idéale SP=P. Néanmoins il sera difficle de l'égalé étant donné qu'un écart va se créer au fur et à mesure dû à la communication entre les processus.
+
+Il éxiste plusieurs types de scalabilité :
+
+
+### Scalabilité forte
+La scalabilité forte mesure la capacité d'un programme à s'adapter à une augmentation du nombre de processus en gardant la taille du problème constante.
+
+Dans notre cas, cela revient à augmenter le nombre de threads/workers tout en gardant le même nombre de points à calculer pour chaque thread/worker.\
+Cela signifie que pour 100000 points lancés au départ, chaque thread/worker devra calculer 100000/nbThread points. Ainsi avec 2 workers chacun devra calculer 50000 points, pour 4 workers chacun devra calculer 25000 points, etc.
+
+Ainsi, en scalabilité forte, nous nous attendons à obtenir un résultat similaire au schéma précédent.
+
+### Scalabilité faible
+La scalibilté faible quant à elle mesure la capacité d'un programme à s'adapter à une augmentation du nombre de processus en augmentant la taille du problème.
+
+Dans notre cas, cela revient à augmenter le nombre de threads/workers tout en augmentant le nombre de points à calculer pour chaque thread/worker.\
+Cela signifie que pour 100000 points lancés au départ, chaque thread/worker devra calculer 100000. Ainsi avec 2 workers chacun devra calculer 100000 points, pareil pour 4 workers, etc.\
+Ainsi le nombre de points à calculer au total sera de 100000 * nbThread.
+
+Avec la scalabilité faible, nous nous attendons à obtenir un résultat similaire au schéma suivant :\
+<img src="res/Schema_weak_scal.png" alt="Schéma représentant le speedup en scalabilité faible" width="428"/>
