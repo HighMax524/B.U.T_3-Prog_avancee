@@ -271,3 +271,46 @@ Ainsi le nombre de points à calculer au total sera de 100000 * nbThread.
 
 Avec la scalabilité faible, nous nous attendons à obtenir un résultat similaire au schéma suivant :\
 <img src="res/Schema_weak_scal.png" alt="Schéma représentant le speedup en scalabilité faible" width="428"/>
+
+### Analyse des résultats
+Nous allons a présent analyser les différents résultats obtenus pour les deux programmes.
+
+### Résultats pour Pi
+Pour le programme Pi, nous avons décidé de lancer le calcul de π avec 10 000 000 points et 10 travailleurs.
+
+#### En scalabilité forte
+Nous avons obtenu les résultats suivants :
+
+| Nombre de Workers | Temps moyen (ms) | Speedup |
+|-------------------|------------------|---------|
+| 1                 |                  | 1.0     |
+| 2                 |                  |         |
+| 3                 |                  |         |
+| 4                 |                  |         |
+| 5                 |                  |         |
+| 6                 |                  |         |
+| 7                 |                  |         |
+| 8                 |                  |         |
+| 9                 |                  |         |
+| 10                |                  |         |
+
+En calculant le speedup, nous obtenons la courbe suivante :
+
+#### En scalabilité faible
+Nous avons obtenu les résultats suivants :
+
+| Nombre de Workers | Temps moyen (ms) | Speedup |
+|-------------------|------------------|---------|
+| 1                 |                  | 1.0     |
+| 2                 |                  |         |
+| 3                 |                  |         |
+| 4                 |                  |         |
+| 5                 |                  |         |
+| 6                 |                  |         |
+| 7                 |                  |         |
+| 8                 |                  |         |
+| 9                 |                  |         |
+| 10                |                  |         |
+
+En calculant le speedup, nous obtenons la courbe suivante :
+
