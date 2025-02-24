@@ -281,36 +281,38 @@ Pour le programme Pi, nous avons décidé de lancer le calcul de π avec 10 000 
 #### En scalabilité forte
 Nous avons obtenu les résultats suivants :
 
-| Nombre de Workers | Temps moyen (ms) | Speedup |
-|-------------------|------------------|---------|
-| 1                 |                  | 1.0     |
-| 2                 |                  |         |
-| 3                 |                  |         |
-| 4                 |                  |         |
-| 5                 |                  |         |
-| 6                 |                  |         |
-| 7                 |                  |         |
-| 8                 |                  |         |
-| 9                 |                  |         |
-| 10                |                  |         |
+| Nombre de Workers | Temps moyen (ms) | Speedup            |
+|-------------------|------------------|--------------------|
+| 1                 | 785.0            | 1.0                |
+| 2                 | 413.0            | 1.900726392251816  |
+| 3                 | 282.0            | 2.7836879432624113 |
+| 4                 | 228.0            | 3.442982456140351  |
+| 5                 | 182.0            | 4.313186813186813  |
+| 6                 | 179.0            | 4.385474860335195  |
+| 7                 | 141.0            | 5.567375886524823  |
+| 8                 | 145.0            | 5.413793103448276  |
+| 9                 | 128.0            | 6.1328125          |
+| 10                | 126.0            | 6.23015873015873   |
 
-En calculant le speedup, nous obtenons la courbe suivante :
+En calculant le speedup, nous obtenons la courbe suivante :\
+<img src="res/Schema_scal_forte_Pi.png" alt="Schéma représentant la scalabilité forte de Pi" width="700"/>
 
 #### En scalabilité faible
 Nous avons obtenu les résultats suivants :
 
-| Nombre de Workers | Temps moyen (ms) | Speedup |
-|-------------------|------------------|---------|
-| 1                 |                  | 1.0     |
-| 2                 |                  |         |
-| 3                 |                  |         |
-| 4                 |                  |         |
-| 5                 |                  |         |
-| 6                 |                  |         |
-| 7                 |                  |         |
-| 8                 |                  |         |
-| 9                 |                  |         |
-| 10                |                  |         |
+| Nombre de Workers | Temps moyen (ms) | Speedup             |
+|-------------------|------------------|---------------------|
+| 1                 | 797.0            | 1.0                 |
+| 2                 | 820.0            | 0.9719512195121951  |
+| 3                 | 827.0            | 0.9637243047158404  |
+| 4                 | 822.0            | 0.9695863746958637  |
+| 5                 | 840.0            | 0.9488095238095238  |
+| 6                 | 844.0            | 0.9443127962085308  |
+| 7                 | 878.0            | 0.907744874715262   |
+| 8                 | 906.0            | 0.8796909492273731  |
+| 9                 | 918.0            | 0.8681917211328976  |
+| 10                | 935.0            | 0.8524064171122995  |
 
-En calculant le speedup, nous obtenons la courbe suivante :
+En calculant le speedup, nous obtenons la courbe suivante :\
+<img src="res/Schema_scal_faible_Pi.png" alt="Schéma représentant la scalabilité forte de Pi" width="700"/>
 
