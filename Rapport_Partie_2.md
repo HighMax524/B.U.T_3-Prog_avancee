@@ -89,7 +89,7 @@ On obtient ainsi une décomposition comme suit :
     - Comptage des points dans le quart de cercle
 - Calcul de π
 
-On peut observer ici, une section critique qui est ncible. En effet, plusieurs tâches peuvent essayer d'incrémenter ncible en même temps. Il faut donc utiliser un verrou mutex (avec la méthode synchronized) pour éviter les problèmes d'&ccèes en simultané.
+On peut observer ici, une section critique qui est ncible. En effet, plusieurs tâches peuvent essayer d'incrémenter ncible en même temps. Il faut donc utiliser un verrou mutex (avec la méthode synchronized) pour éviter les problèmes d'accès en simultané.
 
 Suite a ces analyses, on on peut modifier le code de l'algorithme de Monte-Carlo précedent afin de le rendre parallèle.
 ``` java
