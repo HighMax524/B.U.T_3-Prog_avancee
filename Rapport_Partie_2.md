@@ -321,4 +321,15 @@ Nous avons obtenu les résultats suivants :
 En calculant le speedup, nous obtenons la courbe suivante :\
 <img src="res/Schema_scal_faible_Pi.png" alt="Schéma représentant la scalabilité forte de Pi" width="700"/>
 
-On observe ici que la courbe suit une tendance linéaire mais en SP = 1 puis qu'elle décroit progressivement, ce qui signifie que l'implémentation du paradigme de Master/Worker n'est pas efficace pour le calcul de π en scalabilité faible.
+On observe ici que la courbe suit une tendance linéaire, mais en SP = 1 puis, qu'elle décroit progressivement, ce qui signifie que l'implémentation du paradigme de Master/Worker n'est pas efficace pour le calcul de π en scalabilité faible.
+
+## VI. Mémoire distribuée
+
+Nous allons à présent voir comment paralléliser le calcul de π en mémoire distribuée.
+
+Le parallélisime en mémoire distribué fonctionne de la manière suivante :
+- On découpe le problème en sous-problèmes
+- On distribue ces sous-problèmes sur plusieurs machines
+- Chaque machine effectue le calcul de manière indépendante
+- Les résultats sont ensuite combinés pour obtenir le résultat final
+
