@@ -339,7 +339,7 @@ Pour cela, nous avons deux codes sources :
 - **WorkerSocket** qui correspond aux travailleurs et qui vont effectuer le calcul de π en mémoire distribuée
 
 ### Fonctionnement des codes
-#### MasterSocket
+### MasterSocket
 Ce code commence par :
 - Déclarer un nombre maximum de serveurs (workers) à 8 ainsi que des ports pour chaque worker.
 - Stocker les sockets, les flux d'écritures (writer) et de lectures (reader) pour chaque worker. 
@@ -353,7 +353,7 @@ Après, il va envoyer le nombre de points à calculer à chaque worker et attend
 
 Pour finir, il va calculer π en fonction des résultats obtenus de chaque worker.
 
-#### WorkerSocket
+### WorkerSocket
 Ce code lui va tout d'abord définir un port par défaut (25545). Par la suite, on va parametrer manuellement plusieurs autres workers avec +1 pour chaque port.
 
 Il va ensuite créer un ServerSocket afin d'accepter les connexions entrantes avec la méthode : **s.accept()**.
