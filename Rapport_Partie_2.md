@@ -89,9 +89,9 @@ On obtient ainsi une décomposition comme suit :
     - Comptage des points dans le quart de cercle
 - Calcul de π
 
-On peut observer ici, une section critique qui est ncible. En effet, plusieurs tâches peuvent essayer d'incrémenter ncible en même temps. Il faut donc utiliser un verrou mutex (avec la méthode synchronized) pour éviter les problèmes d'&ccèes en simultané.
+On peut observer ici, une section critique qui est ncible. En effet, plusieurs tâches peuvent essayer d'incrémenter ncible en même temps. Il faut donc utiliser un verrou mutex (avec la méthode synchronized) pour éviter les problèmes d'accès en simultané.
 
-Suite a ces analyses, on on peut modifier le code de l'algorithme de Monte-Carlo précedent afin de le rendre parallèle.
+Suite a ces analyses, on peut modifier le code de l'algorithme de Monte-Carlo précedent afin de le rendre parallèle.
 ``` java
 ncible = 0
 parallel for (p = 0; ntotal > 0; ntotal--){
@@ -171,7 +171,7 @@ Pour **Assignement102**, nous avions :
 - Une classe interne **MonteCarlo** qui implémente Runnable, elle permet de génerer un point aléatoire et vérfie si sa distance est inferieur à 1.
 - Une classe **Assignement102** qui permet d'instancier PiMonteCarlo et affiche la valeur éstimée de π.
 
-Ce code utilise interface Runnable pour gérer l'exécution parallèle des calculs.
+Ce code utilise l'interface Runnable pour gérer l'exécution parallèle des calculs.
 Elle va créer un pool de threads avec un newWorkStealingPool afin d'optimiser l'utilisation des threads en les repartissant en fonction des coeurs disponibles sur la machine.
 
 Chacune des tâches simule un unique lancé, ce qui géneres un grand nombre de threads légers.
