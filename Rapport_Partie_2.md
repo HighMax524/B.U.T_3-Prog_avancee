@@ -10,6 +10,7 @@
   - [Master/Worker](#masterworker)
 - [IV. Implémentation](#iv-implémentation)
 - [V. Mesures de performances](#v-mesures-de-performances)
+- [VI. Mémoire distribuée](#vi-mémoire-distribuée)
 
 ## Introduction
 
