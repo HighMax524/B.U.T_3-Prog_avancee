@@ -333,3 +333,32 @@ Le parallélisime en mémoire distribué fonctionne de la manière suivante :
 - Chaque machine effectue le calcul de manière indépendante
 - Les résultats sont ensuite combinés pour obtenir le résultat final
 
+Pour cela, nous avons deux codes sources :
+- **MasterSocket** qui correspond au maître et qui va distribuer les tâches aux différents travailleursven mémorie distribuée
+- **WorkerSocket** qui correspond aux travailleurs et qui vont effectuer le calcul de π en mémoire distribuée
+
+### Fonctionnement des codes
+#### MasterSocket
+Ce code commence par :
+- Déclarer un nombre maximum de serveurs (workers) à 8 ainsi que des ports pour chaque worker.
+- Stocker les sockets, les flux d'écritures (writer) et de lectures (reader) pour chaque worker. 
+- Définir l'adresse IP pour se connecter aux workers : 127.0.0.1 (localhost).
+
+Ensuite, il va demander à l'utilisateur de rentrer le nombre de workers à utiliser pour le calcul de π. Il faut donc que ce nombre soit inferieur ou egal à 8.
+
+Il va ensuite créer les sockets pour chaque worker et établir une connexion via un socket. Il va également créer les flux d'entrée (bufferReader) et de sortie (bufferWriter) pour chaque worker.
+
+Après, il va envoyer le nombre de points à calculer à chaque worker et attendre les résultats de chaque worker. 
+
+Pour finir, il va calculer π en fonction des résultats obtenus de chaque worker.
+
+#### WorkerSocket
+Ce code lui va tout d'abord définir un port par défaut (25545). Par la suite, on va parametrer manuellement plusieurs autres workers avec +1 pour chaque port.
+
+Il va ensuite créer un ServerSocket afin d'accepter les connexions entrantes avec la méthode : **s.accept()**.
+
+Un BufferedReader et un BufferedWriter sont ensuite créés pour lire les messages envoyés par le Master et envoyer des messages en retour.
+
+Il va ensuite entrer dans une boucle tant qu'il reçoit des messages du Master, il va alors lire le nombre de points à calculer et compter le nombre de points dans le quart de cercle (distance < 1).
+
+Pour finir, il va envoyer le nombre de points dans le quart de cercle au Master.
