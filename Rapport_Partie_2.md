@@ -182,11 +182,12 @@ Et pour **Pi**, nous avions :
 - Une classe **Master** qui instance un certains nombre (fourni par l'utilisateur) de Workers reparti le nombre de lancer entre les workers et qui attend les résultats pour calculer π. 
 - Une classe **Worker** qui récupère le nombre de lancer, génere autant de point qu'il y a de lancer et renvoi le nombre de point dont la distance est inférieur à 1.
 
+Ce code utilise les interfaces Callable et Future de la bibliothèque API concurrent afin de gérer l’exécution parallèle des tâches.
+Elle utilise égalemment ExecutorService avec un FixedThreadPool pour gérer les threads efficacement.
+
 Voici le diagramme UML pour ces deux codes :\
 <img src="res/Diagramme_UML_TP4.jpg" alt="Diagramme UML des classes Assignement102 et Pi"/>
 
-Ce code utilise les interfaces Callable et Future de la bibliothèque API concurrent afin de gérer l’exécution parallèle des tâches.
-Elle utilise égalemment ExecutorService avec un FixedThreadPool pour gérer les threads efficacement.
 
 ### Qu'est-ce qu'un Future?
 Un Future représente le résultat d'une opération effectuée de manière asynchrone.
