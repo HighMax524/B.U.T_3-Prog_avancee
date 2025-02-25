@@ -340,7 +340,7 @@ Voici un schéma représentant le fonctionnement du partage en mémoire distribu
 <img src="res/Schema_memoire_distribuee.jpeg" alt="Schéma représentant le partage en mémoire distribuée" width=""/>
 
 Pour cela, nous avons deux codes sources :
-- **MasterSocket** qui correspond au maître et qui va distribuer les tâches aux différents travailleursven mémorie distribuée
+- **MasterSocket** qui correspond au maître et qui va distribuer les tâches aux différents travailleurs en mémoire distribuée
 - **WorkerSocket** qui correspond aux travailleurs et qui vont effectuer le calcul de π en mémoire distribuée
 
 ### Fonctionnement des codes
