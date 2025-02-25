@@ -170,7 +170,6 @@ Pour **Assignement102**, nous avions :
 - Une classe **PiMonteCarlo** qui est la classe principale et qui encapsule le calcul de π
 - Une classe interne **MonteCarlo** qui implémente Runnable, elle permet de génerer un point aléatoire et vérfie si sa distance est inferieur à 1.
 - Une classe **Assignement102** qui permet d'instancier PiMonteCarlo et affiche la valeur éstimée de π.
-###### Ajouter diagramme UML
 
 Ce code utilise interface Runnable pour gérer l'exécution parallèle des calculs.
 Elle va créer un pool de threads avec un newWorkStealingPool afin d'optimiser l'utilisation des threads en les repartissant en fonction des coeurs disponibles sur la machine.
@@ -182,7 +181,9 @@ Et pour **Pi**, nous avions :
 - Une classe **Pi** qui execute le programme en appelant la méthode Master.doRun(50000,10) qui permet de lancer le calcul de π avec 50000 points et 10 travailleurs.
 - Une classe **Master** qui instance un certains nombre (fourni par l'utilisateur) de Workers reparti le nombre de lancer entre les workers et qui attend les résultats pour calculer π. 
 - Une classe **Worker** qui récupère le nombre de lancer, génere autant de point qu'il y a de lancer et renvoi le nombre de point dont la distance est inférieur à 1.
-###### Ajouter diagramme UML
+
+Voici le diagramme UML pour ces deux codes :\
+<img src="res/Diagramme_UML_TP4.jpg" alt="Diagramme UML des classes Assignement102 et Pi"/>
 
 Ce code utilise les interfaces Callable et Future de la bibliothèque API concurrent afin de gérer l’exécution parallèle des tâches.
 Elle utilise égalemment ExecutorService avec un FixedThreadPool pour gérer les threads efficacement.
