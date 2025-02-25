@@ -334,6 +334,11 @@ Le parallélisime en mémoire distribué fonctionne de la manière suivante :
 - Chaque machine effectue le calcul de manière indépendante
 - Les résultats sont ensuite combinés pour obtenir le résultat final
 
+Comme nous pouvons le voir, c'est similaire à la mémoire partagée, mais avec la différence que chaque processeur ou nœud a sa propre mémoire locale, et qu'ils communiquent entre eux par la transmission de messages 
+
+Voici un schéma représentant le fonctionnement du partage en mémoire distribuée :\
+<img src="res/Schema_memoire_distribuee.jpeg" alt="Schéma représentant le partage en mémoire distribuée" width=""/>
+
 Pour cela, nous avons deux codes sources :
 - **MasterSocket** qui correspond au maître et qui va distribuer les tâches aux différents travailleursven mémorie distribuée
 - **WorkerSocket** qui correspond aux travailleurs et qui vont effectuer le calcul de π en mémoire distribuée
