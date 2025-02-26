@@ -317,7 +317,7 @@ Nous avons obtenu les résultats suivants :
 | 10                |                  |         |
 
 En calculant le speedup, nous obtenons la courbe suivante :\
-<img src="res/Schema_scal_faible_assignement102.png" alt="Schéma représentant la scalabilité forte de Pi" width="700"/>
+<img src="res/Schema_scal_faible_assignement102.png" alt="Schéma représentant la scalabilité faible de Assignement102" width="700"/>
 
 ### Résultats pour Pi
 Pour le programme Pi, nous lançons également le programme avec 10 000 000 points et 10 travailleurs.
