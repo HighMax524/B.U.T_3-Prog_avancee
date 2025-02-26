@@ -10,6 +10,7 @@
   - [Master/Worker](#masterworker)
 - [IV. Implémentation](#iv-implémentation)
 - [V. Mesures de performances](#v-mesures-de-performances)
+- [VI. Mémoire distribuée](#vi-mémoire-distribuée)
 
 ## Introduction
 
@@ -274,11 +275,52 @@ Ainsi le nombre de points à calculer au total sera de 100000 * nbThread.
 Avec la scalabilité faible, nous nous attendons à obtenir un résultat similaire au schéma suivant :\
 <img src="res/Schema_weak_scal.png" alt="Schéma représentant le speedup en scalabilité faible" width="428"/>
 
-### Analyse des résultats
-Nous allons a présent analyser les différents résultats obtenus pour les deux programmes.
+### Résultats pour Assignement102
+Pour le programme Assignement102, nous avons décidé de lancer le calcul de π avec 10 000 000 points et 10 travailleurs.
+
+#### En scalabilité forte
+Nous avons obtenu les résultats suivants :
+
+| Nombre de Workers | Temps moyen (ms) | Speedup             |
+|-------------------|------------------|---------------------|
+| 1                 | 2438.0           | 1.0                 |
+| 2                 | 2334.0           | 1.04455869751499566 |
+| 3                 | 2199.0           | 1.1086857662573897  |
+| 4                 | 2250.0           | 1.0835555555555556  |
+| 5                 | 2352.0           | 1.0365646258503400  |
+| 6                 | 2304.0           | 1.0581597222222223  |
+| 7                 | 2461.0           | 0.9906542056074766  |
+| 8                 | 2399.0           | 1.0162567736556898  |
+| 9                 | 2147.0           | 1.1355379599441080  |
+| 10                | 2374.0           | 1.0269587194608256  |
+
+En calculant le speedup, nous obtenons la courbe suivante :\
+<img src="res/Schema_scal_forte_assignement102.png" alt="Schéma représentant la scalabilité forte de Assignement102" width="700"/>
+
+On observe, courbe suit une tendance linéaire en SP = 1, cela ressembla ainsi plus à une scalabilité faible qu'à une scalabilité forte.\
+On peut en déduire que l'implémentation du paradigme en itération parallèle n'est pas efficace pour le calcul de π en scalabilité forte.
+
+#### En scalabilité faible
+Nous avons obtenu les résultats suivants :
+
+| Nombre de Workers | Temps moyen (ms) | Speedup |
+|-------------------|------------------|---------|
+| 1                 |                  | 1.0     |
+| 2                 |                  |         |
+| 3                 |                  |         |
+| 4                 |                  |         |
+| 5                 |                  |         |
+| 6                 |                  |         |
+| 7                 |                  |         |
+| 8                 |                  |         |
+| 9                 |                  |         |
+| 10                |                  |         |
+
+En calculant le speedup, nous obtenons la courbe suivante :\
+<img src="res/Schema_scal_faible_Pi.png" alt="Schéma représentant la scalabilité forte de Pi" width="700"/>
 
 ### Résultats pour Pi
-Pour le programme Pi, nous avons décidé de lancer le calcul de π avec 10 000 000 points et 10 travailleurs.
+Pour le programme Pi, nous lançons également le programme avec 10 000 000 points et 10 travailleurs.
 
 #### En scalabilité forte
 Nous avons obtenu les résultats suivants :
@@ -333,3 +375,37 @@ Le parallélisime en mémoire distribué fonctionne de la manière suivante :
 - Chaque machine effectue le calcul de manière indépendante
 - Les résultats sont ensuite combinés pour obtenir le résultat final
 
+Comme nous pouvons le voir, c'est similaire à la mémoire partagée, mais avec la différence que chaque processeur ou nœud a sa propre mémoire locale, et qu'ils communiquent entre eux par la transmission de messages 
+
+Voici un schéma représentant le fonctionnement du partage en mémoire distribuée :\
+<img src="res/Schema_memoire_distribuee.jpeg" alt="Schéma représentant le partage en mémoire distribuée" width=""/>
+
+Pour cela, nous avons deux codes sources :
+- **MasterSocket** qui correspond au maître et qui va distribuer les tâches aux différents travailleurs en mémoire distribuée
+- **WorkerSocket** qui correspond aux travailleurs et qui vont effectuer le calcul de π en mémoire distribuée
+
+### Fonctionnement des codes
+### MasterSocket
+Ce code commence par :
+- Déclarer un nombre maximum de serveurs (workers) à 8 ainsi que des ports pour chaque worker.
+- Stocker les sockets, les flux d'écritures (writer) et de lectures (reader) pour chaque worker. 
+- Définir l'adresse IP pour se connecter aux workers : 127.0.0.1 (localhost).
+
+Ensuite, il va demander à l'utilisateur de rentrer le nombre de workers à utiliser pour le calcul de π. Il faut donc que ce nombre soit inferieur ou egal à 8.
+
+Il va ensuite créer les sockets pour chaque worker et établir une connexion via un socket. Il va également créer les flux d'entrée (bufferReader) et de sortie (bufferWriter) pour chaque worker.
+
+Après, il va envoyer le nombre de points à calculer à chaque worker et attendre les résultats de chaque worker. 
+
+Pour finir, il va calculer π en fonction des résultats obtenus de chaque worker.
+
+### WorkerSocket
+Ce code lui va tout d'abord définir un port par défaut (25545). Par la suite, on va parametrer manuellement plusieurs autres workers avec +1 pour chaque port.
+
+Il va ensuite créer un ServerSocket afin d'accepter les connexions entrantes avec la méthode : **s.accept()**.
+
+Un BufferedReader et un BufferedWriter sont ensuite créés pour lire les messages envoyés par le Master et envoyer des messages en retour.
+
+Il va ensuite entrer dans une boucle tant qu'il reçoit des messages du Master, il va alors lire le nombre de points à calculer et compter le nombre de points dans le quart de cercle (distance < 1).
+
+Pour finir, il va envoyer le nombre de points dans le quart de cercle au Master.
