@@ -1,5 +1,7 @@
-// Estimate the value of Pi using Monte-Carlo Method, using parallel program
 package TP4_Monte_Carlo;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -53,11 +55,24 @@ public class Assignment102 {
 		System.out.println("Approx value:" + value);
 		System.out.println("Difference to exact value of pi: " + (value - Math.PI));
 		System.out.println("% Error: " + (value - Math.PI) / Math.PI * 100 + " %");
-		System.out.println("Error: " + (Math.abs((value - Math.PI)) / Math.PI) +"\n");
-		
+		System.out.println("Error: " + (Math.abs((value - Math.PI)) / Math.PI) + "\n");
+
 		System.out.println("\nAvailable processors: " + nProcessors);
 		System.out.println("Time Duration: " + (stopTime - startTime) + "ms");
 
-		System.out.println( (Math.abs((value - Math.PI)) / Math.PI) +" "+ nThrows +" "+ nProcessors +" "+ (stopTime - startTime));
+		System.out.println((Math.abs((value - Math.PI)) / Math.PI) + " " + nThrows + " " + nProcessors + " " + (stopTime - startTime));
+
+		// Writing results to result_assignement102.txt
+		try (FileWriter fileWriter = new FileWriter("result_assignement102.txt", false); // Open file in append mode
+			 PrintWriter printWriter = new PrintWriter(fileWriter)) {
+			printWriter.printf("Approx value: %.6f\n", value); // Format with 6 decimal places
+			printWriter.printf("Difference to exact value of pi: %.6f\n", (value - Math.PI)); // Same for difference
+			printWriter.printf("%% Error: %.6f %%\n", (value - Math.PI) / Math.PI * 100); // Format percentage error
+			printWriter.printf("Error: %.6f\n", (Math.abs((value - Math.PI)) / Math.PI)); // Format error
+			printWriter.printf("N Throws: %d, Available processors: %d\n", nThrows, nProcessors); // Integer formatting
+			printWriter.printf("Time Duration: %d ms\n\n", (stopTime - startTime)); // Time in ms
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
