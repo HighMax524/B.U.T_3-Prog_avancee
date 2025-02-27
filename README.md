@@ -8,7 +8,7 @@ Voici la liste des différents TP réalisé :
 - **TP1 Mobile** Consiste à implémenter une simulation du mouvement d’un ou plusieurs mobiles en Java en utilisant des threads
 - **TP2 Affichage** : Aborde la synchronisation de tâches en Java à l’aide de l’exclusion mutuelle et des sémaphores.
 - **TP3 Bal** : Illustre le modèle producteur-consommateur en Java à travers la gestion d’une boîte aux lettres
-- **TP4 Monte Carlo distribué et partagé** :
+- **TP4 Monte Carlo distribué et partagé** : Explore l'algorithme de Monte Carlo (MC) pour estimer la valeur de π et propose des solutions pour le paralléliser sur une architecture à mémoire distribuée et partagée.
 
 Pour plus de détails, consultez les 2 rapports suivants :
 - [Rapport Partie 1](Rapport_Partie_1.md) : Rapport des 3 premiers TPs 
