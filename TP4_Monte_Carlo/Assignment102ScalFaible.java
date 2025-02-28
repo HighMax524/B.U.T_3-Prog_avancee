@@ -62,7 +62,7 @@ public class Assignment102ScalFaible {
 
 		PiMonteCarloScalFaible PiVal = new PiMonteCarloScalFaible(nThrows);
 		long startTime = System.currentTimeMillis();
-		double value = PiVal.getPi(nProcessors);  // Calcul de Pi avec nProcessors processeurs
+		double value = PiVal.getPi(1);  // Calcul de Pi avec nProcessors processeurs
 		long stopTime = System.currentTimeMillis();
 		double singleWorkerTime = stopTime - startTime;
 
