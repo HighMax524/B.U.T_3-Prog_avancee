@@ -404,6 +404,8 @@ Après, il va envoyer le nombre de points à calculer à chaque worker et attend
 
 Pour finir, il va calculer π en fonction des résultats obtenus de chaque worker.
 
+<u style="color:red">**ATTENTION :**</u> Pour que ce code fonctionne, il faut d'abord mettre en place et lancer les WorkerSocket avant de lancer le code MasterSocket.
+
 ### WorkerSocket
 Ce code lui va tout d'abord définir un port par défaut (25545). Par la suite, on va parametrer manuellement plusieurs autres workers avec +1 pour chaque port.
 
