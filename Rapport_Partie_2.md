@@ -275,11 +275,55 @@ Ainsi le nombre de points à calculer au total sera de 100000 * nbThread.
 Avec la scalabilité faible, nous nous attendons à obtenir un résultat similaire au schéma suivant :\
 <img src="res/Schema_weak_scal.png" alt="Schéma représentant le speedup en scalabilité faible" width="428"/>
 
-### Analyse des résultats
-Nous allons a présent analyser les différents résultats obtenus pour les deux programmes.
+### Résultats pour Assignement102
+Pour le programme Assignement102, nous avons décidé de lancer le calcul de π avec 10 000 000 points et 10 travailleurs.
+
+#### En scalabilité forte
+Nous avons obtenu les résultats suivants :
+
+| Nombre de Workers | Temps moyen (ms) | Speedup             |
+|-------------------|------------------|---------------------|
+| 1                 | 2438.0           | 1.0                 |
+| 2                 | 2334.0           | 1.04455869751499566 |
+| 3                 | 2199.0           | 1.1086857662573897  |
+| 4                 | 2250.0           | 1.0835555555555556  |
+| 5                 | 2352.0           | 1.0365646258503400  |
+| 6                 | 2304.0           | 1.0581597222222223  |
+| 7                 | 2461.0           | 0.9906542056074766  |
+| 8                 | 2399.0           | 1.0162567736556898  |
+| 9                 | 2147.0           | 1.1355379599441080  |
+| 10                | 2374.0           | 1.0269587194608256  |
+
+En calculant le speedup, nous obtenons la courbe suivante :\
+<img src="res/Schema_scal_forte_assignement102.png" alt="Schéma représentant la scalabilité forte de Assignement102" width="700"/>
+
+On observe, courbe suit une tendance linéaire en SP = 1, cela ressembla ainsi plus à une scalabilité faible qu'à une scalabilité forte.\
+On peut en déduire que l'implémentation du paradigme en itération parallèle n'est pas efficace pour le calcul de π en scalabilité forte.
+
+#### En scalabilité faible
+Nous avons obtenu les résultats suivants :
+
+| Nombre de Workers | Temps moyen (ms) | Speedup            |
+|-------------------|------------------|--------------------|
+| 1                 | 2569,0           | 1.0                |
+| 2                 | 4702,0           | 0,5463632496809868 |
+| 3                 | 8269,0           | 0,3106784375377917 |
+| 4                 | 9678,0           | 0,2654474064889440 |
+| 5                 | 12532,0          | 0,2049952122566230 |
+| 6                 | 14580,0          | 0,1762002743484225 |
+| 7                 | 17448,0          | 0,1472375057313159 |
+| 8                 | 18091,0          | 0,1420043115361230 |
+| 9                 | 22310,0          | 0,1151501568803227 |
+| 10                | 25919,0          | 0,099116478259192  |
+
+En calculant le speedup, nous obtenons la courbe suivante :\
+<img src="res/Schema_scal_faible_assignement102.png" alt="Schéma représentant la scalabilité faible de Assignement102" width="700"/>
+
+On remarque ici que la courbe décroit rapidement au debut puis devient plus linéaire en approchant de 0.\
+On peut ainsi en déduire que l'implémentation du paradigme en itération parallèle n'est pas efficace pour le calcul de π en scalabilité faible.
 
 ### Résultats pour Pi
-Pour le programme Pi, nous avons décidé de lancer le calcul de π avec 10 000 000 points et 10 travailleurs.
+Pour le programme Pi, nous lançons également le programme avec 10 000 000 points et 10 travailleurs.
 
 #### En scalabilité forte
 Nous avons obtenu les résultats suivants :
@@ -323,6 +367,8 @@ En calculant le speedup, nous obtenons la courbe suivante :\
 <img src="res/Schema_scal_faible_Pi.png" alt="Schéma représentant la scalabilité forte de Pi" width="700"/>
 
 On observe ici que la courbe suit une tendance linéaire, mais en SP = 1 puis, qu'elle décroit progressivement, ce qui signifie que l'implémentation du paradigme de Master/Worker n'est pas efficace pour le calcul de π en scalabilité faible.
+
+Cependant, on peut voir que cette courbe est similare à celle de la scalabilité forte d'assignement102, ce qui signifie, finalement, que l'implémentation du paradigme de Master/Worker est plus efficace que celle de l'itération parallèle.
 
 ## VI. Mémoire distribuée
 
