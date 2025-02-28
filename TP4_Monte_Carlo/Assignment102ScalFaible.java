@@ -77,7 +77,7 @@ public class Assignment102ScalFaible {
 			 PrintWriter printWriter = new PrintWriter(fileWriter)) {
 
 			// Ecrire le premier résultat (temps avec un seul worker)
-			printWriter.printf("Speedup: 1, Temps 1 worker: %.1f, Total Throws: %d\n\n", singleWorkerTime, nThrows);
+			printWriter.printf("Speedup: 1, Temps 1 worker: %.1f\n\n", singleWorkerTime, nThrows);
 
 			// Pour les autres processors, nous avons un tableau pour tester la variation
 			for (int i = 2; i <= nProcessors; i++) {
@@ -92,7 +92,7 @@ public class Assignment102ScalFaible {
 
 				// Ecrire les résultats dans le fichier, avec le nombre de lancers effectués
 				int totalThrows = nThrows * i;
-				printWriter.printf("Speedup: %.16f, Temps 1 worker: %.1f, Temps avec %d worker: %.1f, Total Throws: %d\n\n",
+				printWriter.printf("Speedup: %.16f, Temps 1 worker: %.1f, Temps avec %d worker: %.1f\n\n",
 						speedup, singleWorkerTime, i, multiWorkerTime, totalThrows);
 			}
 		} catch (IOException e) {
