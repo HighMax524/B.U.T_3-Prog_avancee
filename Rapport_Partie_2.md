@@ -303,21 +303,24 @@ On peut en déduire que l'implémentation du paradigme en itération parallèle 
 #### En scalabilité faible
 Nous avons obtenu les résultats suivants :
 
-| Nombre de Workers | Temps moyen (ms) | Speedup |
-|-------------------|------------------|---------|
-| 1                 |                  | 1.0     |
-| 2                 |                  |         |
-| 3                 |                  |         |
-| 4                 |                  |         |
-| 5                 |                  |         |
-| 6                 |                  |         |
-| 7                 |                  |         |
-| 8                 |                  |         |
-| 9                 |                  |         |
-| 10                |                  |         |
+| Nombre de Workers | Temps moyen (ms) | Speedup            |
+|-------------------|------------------|--------------------|
+| 1                 | 2569,0           | 1.0                |
+| 2                 | 4702,0           | 0,5463632496809868 |
+| 3                 | 8269,0           | 0,3106784375377917 |
+| 4                 | 9678,0           | 0,2654474064889440 |
+| 5                 | 12532,0          | 0,2049952122566230 |
+| 6                 | 14580,0          | 0,1762002743484225 |
+| 7                 | 17448,0          | 0,1472375057313159 |
+| 8                 | 18091,0          | 0,1420043115361230 |
+| 9                 | 22310,0          | 0,1151501568803227 |
+| 10                | 25919,0          | 0,099116478259192  |
 
 En calculant le speedup, nous obtenons la courbe suivante :\
 <img src="res/Schema_scal_faible_assignement102.png" alt="Schéma représentant la scalabilité faible de Assignement102" width="700"/>
+
+On remarque ici que la courbe décroit rapidement au debut puis devient plus linéaire en approchant de 0.\
+On peut ainsi en déduire que l'implémentation du paradigme en itération parallèle n'est pas efficace pour le calcul de π en scalabilité faible.
 
 ### Résultats pour Pi
 Pour le programme Pi, nous lançons également le programme avec 10 000 000 points et 10 travailleurs.
@@ -363,7 +366,8 @@ Nous avons obtenu les résultats suivants :
 En calculant le speedup, nous obtenons la courbe suivante :\
 <img src="res/Schema_scal_faible_Pi.png" alt="Schéma représentant la scalabilité forte de Pi" width="700"/>
 
-On observe ici que la courbe suit une tendance linéaire, mais en SP = 1 puis, qu'elle décroit progressivement, ce qui signifie que l'implémentation du paradigme de Master/Worker n'est pas efficace pour le calcul de π en scalabilité faible.
+On observe ici que la courbe suit une tendance linéaire, mais en SP = 1 puis, qu'elle décroit progressivement, ce qui signifie que l'implémentation du paradigme de Master/Worker n'est pas efficace pour le calcul de π en scalabilité faible.\
+Cependat, on peut voir que cette courbe est similare à celle de la scalabilité forte d'assignement102, ce qui signifie, finalement, que l'implémentation du paradigme de Master/Worker est plus efficace que celle de l'itération parallèle.
 
 ## VI. Mémoire distribuée
 
