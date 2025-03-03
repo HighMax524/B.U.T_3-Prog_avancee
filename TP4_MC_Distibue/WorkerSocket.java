@@ -1,5 +1,4 @@
 package TP4_MC_Distibue;
-import TP4_Monte_Carlo.Master;
 
 import java.io.*;
 import java.net.*;
