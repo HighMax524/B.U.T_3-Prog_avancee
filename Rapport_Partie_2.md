@@ -283,16 +283,16 @@ Nous avons obtenu les résultats suivants :
 
 | Nombre de Workers | Temps moyen (ms) | Speedup             |
 |-------------------|------------------|---------------------|
-| 1                 | 2438.0           | 1.0                 |
-| 2                 | 2334.0           | 1.04455869751499566 |
-| 3                 | 2199.0           | 1.1086857662573897  |
-| 4                 | 2250.0           | 1.0835555555555556  |
-| 5                 | 2352.0           | 1.0365646258503400  |
-| 6                 | 2304.0           | 1.0581597222222223  |
-| 7                 | 2461.0           | 0.9906542056074766  |
-| 8                 | 2399.0           | 1.0162567736556898  |
-| 9                 | 2147.0           | 1.1355379599441080  |
-| 10                | 2374.0           | 1.0269587194608256  |
+| 1                 | 2418.0           | 1.0                 |
+| 2                 | 1930.0           | 1,2528497409326425  |
+| 3                 | 1882.0           | 1,2848034006376197  |
+| 4                 | 1977.0           | 1,2230652503793626  |
+| 5                 | 2180.0           | 1,1091743119266055  |
+| 6                 | 1961.0           | 1,2330443651198368  |
+| 7                 | 1176.0           | 2,0561224489795920  |
+| 8                 | 3176.0           | 0,7613350125944585  |
+| 9                 | 3388.0           | 0,7136953955135773  |
+| 10                | 3169.0           | 0,7630167245187757  |
 
 En calculant le speedup, nous obtenons la courbe suivante :\
 <img src="res/Schema_scal_forte_assignement102.png" alt="Schéma représentant la scalabilité forte de Assignement102" width="700"/>
@@ -303,18 +303,18 @@ On peut en déduire que l'implémentation du paradigme en itération parallèle 
 #### En scalabilité faible
 Nous avons obtenu les résultats suivants :
 
-| Nombre de Workers | Temps moyen (ms) | Speedup            |
-|-------------------|------------------|--------------------|
-| 1                 | 2569,0           | 1.0                |
-| 2                 | 4702,0           | 0,5463632496809868 |
-| 3                 | 8269,0           | 0,3106784375377917 |
-| 4                 | 9678,0           | 0,2654474064889440 |
-| 5                 | 12532,0          | 0,2049952122566230 |
-| 6                 | 14580,0          | 0,1762002743484225 |
-| 7                 | 17448,0          | 0,1472375057313159 |
-| 8                 | 18091,0          | 0,1420043115361230 |
-| 9                 | 22310,0          | 0,1151501568803227 |
-| 10                | 25919,0          | 0,099116478259192  |
+| Nombre de Workers | Temps moyen (ms) | Speedup             |
+|-------------------|------------------|---------------------|
+| 1                 | 901,0            | 1.0                 |
+| 2                 | 1495,0           | 0,6026755852842809  |
+| 3                 | 2543,0           | 0,3543059378686591  |
+| 4                 | 3590,0           | 0,2509749303621170  |
+| 5                 | 5256,0           | 0,1714231354642314  |
+| 6                 | 17445,0          | 0,0516480366867297  |
+| 7                 | 14244,0          | 0,0632547037349059  |
+| 8                 | 14119,0          | 0,0638147177562150  |
+| 9                 | 30905,0          | 0,0291538585989322  |
+| 10                | 37257,0          | 0,0241833749362536  |
 
 En calculant le speedup, nous obtenons la courbe suivante :\
 <img src="res/Schema_scal_faible_assignement102.png" alt="Schéma représentant la scalabilité faible de Assignement102" width="700"/>
@@ -328,23 +328,23 @@ Pour le programme Pi, nous lançons également le programme avec 10 000 000 poin
 #### En scalabilité forte
 Nous avons obtenu les résultats suivants :
 
-| Nombre de Workers | Temps moyen (ms) | Speedup            |
-|-------------------|------------------|--------------------|
-| 1                 | 785.0            | 1.0                |
-| 2                 | 413.0            | 1.900726392251816  |
-| 3                 | 282.0            | 2.7836879432624113 |
-| 4                 | 228.0            | 3.442982456140351  |
-| 5                 | 182.0            | 4.313186813186813  |
-| 6                 | 179.0            | 4.385474860335195  |
-| 7                 | 141.0            | 5.567375886524823  |
-| 8                 | 145.0            | 5.413793103448276  |
-| 9                 | 128.0            | 6.1328125          |
-| 10                | 126.0            | 6.23015873015873   |
+| Nombre de Workers | Temps moyen (ms) | Speedup             |
+|-------------------|------------------|---------------------|
+| 1                 | 326.0            | 1.0                 |
+| 2                 | 168.0            | 1.9404761904761905  |
+| 3                 | 110.0            | 2.963636363636364   |
+| 4                 | 82.0             | 3.975609756097561   |
+| 5                 | 66.0             | 4.9393939393939394  |
+| 6                 | 56.0             | 5.821428571428571   |
+| 7                 | 51.0             | 6.392156862745098   |
+| 8                 | 49.0             | 6.653061224489796   |
+| 9                 | 73.0             | 4.465753424657534   |
+| 10                | 66.0             | 4.9393939393939394  |
 
 En calculant le speedup, nous obtenons la courbe suivante :\
 <img src="res/Schema_scal_forte_Pi.png" alt="Schéma représentant la scalabilité forte de Pi" width="700"/>
 
-On observe, comme dit précedemment que la courbe suit une tendance linéaire, puis que l'écart se creuse au fur et à mesure que le nombre de workers augmente. On l'observe notamment a partir de 6 workers.\
+On observe, comme dit précedemment que la courbe suit une tendance linéaire, puis que l'écart se creuse au fur et à mesure que le nombre de workers augmente. On l'observe notamment a partir de 7 workers.\
 On peut ainsi en déduire que l'implémentation du paradigme de Master/Worker est efficace pour le calcul de π.
 
 #### En scalabilité faible
@@ -352,23 +352,22 @@ Nous avons obtenu les résultats suivants :
 
 | Nombre de Workers | Temps moyen (ms) | Speedup             |
 |-------------------|------------------|---------------------|
-| 1                 | 797.0            | 1.0                 |
-| 2                 | 820.0            | 0.9719512195121951  |
-| 3                 | 827.0            | 0.9637243047158404  |
-| 4                 | 822.0            | 0.9695863746958637  |
-| 5                 | 840.0            | 0.9488095238095238  |
-| 6                 | 844.0            | 0.9443127962085308  |
-| 7                 | 878.0            | 0.907744874715262   |
-| 8                 | 906.0            | 0.8796909492273731  |
-| 9                 | 918.0            | 0.8681917211328976  |
-| 10                | 935.0            | 0.8524064171122995  |
+| 1                 | 319.0            | 1.0                 |
+| 2                 | 323.0            | 0.9876160990712074  |
+| 3                 | 325.0            | 0.9815384615384616  |
+| 4                 | 324.0            | 0.9845679012345679  |
+| 5                 | 324.0            | 0.9845679012345679 |
+| 6                 | 326.0            | 0.9785276073619632  |
+| 7                 | 326.0            | 0.9785276073619632   |
+| 8                 | 335.0            | 0.9522388059701492  |
+| 9                 | 461.0            | 0.6919739696312365  |
+| 10                | 503.0            | 0.6341948310139165  |
 
 En calculant le speedup, nous obtenons la courbe suivante :\
 <img src="res/Schema_scal_faible_Pi.png" alt="Schéma représentant la scalabilité forte de Pi" width="700"/>
 
-On observe ici que la courbe suit une tendance linéaire, mais en SP = 1 puis, qu'elle décroit progressivement, ce qui signifie que l'implémentation du paradigme de Master/Worker n'est pas efficace pour le calcul de π en scalabilité faible.
-
-Cependant, on peut voir que cette courbe est similare à celle de la scalabilité forte d'assignement102, ce qui signifie, finalement, que l'implémentation du paradigme de Master/Worker est plus efficace que celle de l'itération parallèle.
+On observe ici que la courbe suit une tendance linéaire, mais en SP = 1 puis, qu'elle décroit progressivement, ce qui signifie que l'implémentation du paradigme de Master/Worker n'est pas efficace pour le calcul de π en scalabilité faible.\
+Cependat, on peut voir que cette courbe est similare à celle de la scalabilité forte d'assignement102, ce qui signifie, finalement, que l'implémentation du paradigme de Master/Worker est plus efficace que celle de l'itération parallèle.
 
 ## VI. Mémoire distribuée
 
@@ -403,8 +402,6 @@ Il va ensuite créer les sockets pour chaque worker et établir une connexion vi
 Après, il va envoyer le nombre de points à calculer à chaque worker et attendre les résultats de chaque worker. 
 
 Pour finir, il va calculer π en fonction des résultats obtenus de chaque worker.
-
-<u style="color:red">**ATTENTION :**</u> Pour que ce code fonctionne, il faut d'abord mettre en place et lancer les WorkerSocket avant de lancer le code MasterSocket.
 
 ### WorkerSocket
 Ce code lui va tout d'abord définir un port par défaut (25545). Par la suite, on va parametrer manuellement plusieurs autres workers avec +1 pour chaque port.
