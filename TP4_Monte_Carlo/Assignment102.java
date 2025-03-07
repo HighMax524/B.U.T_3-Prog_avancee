@@ -1,7 +1,5 @@
+// Estimate the value of Pi using Monte-Carlo Method, using parallel program
 package TP4_Monte_Carlo;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -11,7 +9,6 @@ class PiMonteCarlo {
 	AtomicInteger nAtomSuccess;
 	int nThrows;
 	double value;
-
 	class MonteCarlo implements Runnable {
 		@Override
 		public void run() {
@@ -21,13 +18,11 @@ class PiMonteCarlo {
 				nAtomSuccess.incrementAndGet();
 		}
 	}
-
 	public PiMonteCarlo(int nThrows) {
 		this.nAtomSuccess = new AtomicInteger(0);
 		this.nThrows = nThrows;
 		this.value = 0;
 	}
-
 	public double getPi(int nProcessors) {
 		ExecutorService executor = Executors.newWorkStealingPool(nProcessors);
 		for (int i = 1; i <= nThrows; i++) {
@@ -55,34 +50,14 @@ public class Assignment102 {
 		long startTime = System.currentTimeMillis();
 		double value = PiVal.getPi(nProcessors);
 		long stopTime = System.currentTimeMillis();
-		double singleWorkerTime = stopTime - startTime;
-		System.out.println("Approx value: " + value);
+		System.out.println("Approx value:" + value);
 		System.out.println("Difference to exact value of pi: " + (value - Math.PI));
 		System.out.println("% Error: " + (value - Math.PI) / Math.PI * 100 + " %");
-		System.out.println("Error: " + (Math.abs((value - Math.PI)) / Math.PI) + "\n");
+		System.out.println("Error: " + (Math.abs((value - Math.PI)) / Math.PI) +"\n");
+		
+		System.out.println("\nAvailable processors: " + nProcessors);
+		System.out.println("Time Duration: " + (stopTime - startTime) + "ms");
 
-		// Ecriture des résultats dans le fichier result_assignement102.txt
-		try (FileWriter fileWriter = new FileWriter("result_assignement102.txt", false); // Ouvre le fichier en mode ajout
-			 PrintWriter printWriter = new PrintWriter(fileWriter)) {
-
-			// Ecrire le premier résultat (temps avec un seul worker)
-			printWriter.printf("Speedup: 1, Temps 1 worker: %.1f\n\n", singleWorkerTime); // Format pour 1 worker
-
-			// Pour les autres processors, nous avons un tableau pour tester la variation
-			for (int i = 2; i <= nProcessors; i++) {
-				long currentTime = System.currentTimeMillis();
-				PiMonteCarlo PiValCurrent = new PiMonteCarlo(nThrows); // Réinstancier l'objet pour tester à nouveau
-				PiValCurrent.getPi(i);
-				long currentStopTime = System.currentTimeMillis();
-				double multiWorkerTime = currentStopTime - currentTime;
-
-				// Calcul du Speedup
-				double speedup = singleWorkerTime / multiWorkerTime;
-				printWriter.printf("Speedup: %.16f, Temps 1 worker: %.1f, Temps avec %d worker: %.1f\n\n",
-						speedup, singleWorkerTime, i, multiWorkerTime);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		System.out.println( (Math.abs((value - Math.PI)) / Math.PI) +" "+ nThrows +" "+ nProcessors +" "+ (stopTime - startTime));
 	}
 }
