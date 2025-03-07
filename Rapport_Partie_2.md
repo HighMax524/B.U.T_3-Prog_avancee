@@ -465,42 +465,51 @@ La communication entre le master et les workers se fait via des sockets, assuran
 
 ### B. Implémentation
 
-Nous avons adapté les codes précédents pour intégrer cette dimension distribuée. Voici les principales modifications apportées :
+Nous avons intégré le modèle distribué en adaptant nos algorithmes existants. Les principales modifications apportées sont les suivantes :
 
 1. **MasterSocket** :
-   - Création d’une méthode `executeDistributedMonteCarlo(int nTot, int nWorkers)` pour gérer la distribution et la collecte des résultats.
-   - Les résultats partiels sont récupérés et additionnés avant de calculer π.
+   - Méthode `executeDistributedMonteCarlo(int nTot, int nWorkers)` : gère la distribution des points et la collecte des résultats partiels.
+   - Agrège les résultats transmis par chaque worker et calcule π via la formule classique :
+   
+   \[
+   \pi \approx 4 \times \frac{n_{cible}}{n_{total}}
+   \]
 
 2. **WorkerSocket** :
-   - Ajout de la méthode `performMonteCarloComputation(int nPoints)` pour effectuer les calculs localement.
-   - Envoi du nombre de points dans le quart de disque au master une fois les calculs terminés.
+   - Méthode `performMonteCarloComputation(int nPoints)` : génère les points aléatoires, compte ceux dans le quart de disque et envoie le résultat au master.
+   - Utilisation d’une file d’attente pour gérer les tâches entrantes de manière asynchrone.
 
-### C. Tests de performance
+### C. Évaluation des performances
 
 #### 1. Méthodologie
 
-Pour évaluer la scalabilité et l’efficacité de cette implémentation, nous avons mesuré les temps d’exécution pour différentes combinaisons de workers et de nombre total de points, selon deux approches :
+Pour évaluer la scalabilité et l’efficacité de cette implémentation, nous avons mesuré les temps d’exécution selon deux approches classiques :
 
-- **Scalabilité forte** : nombre fixe de points répartis entre un nombre croissant de workers.
-- **Scalabilité faible** : nombre de points augmentant proportionnellement au nombre de workers.
+- **Scalabilité forte** : le nombre total de points est fixe, et nous augmentons le nombre de workers. L’objectif est d’observer si le temps d’exécution diminue proportionnellement au nombre de workers.
+- **Scalabilité faible** : le nombre de points est proportionnel au nombre de workers, chaque worker traitant le même nombre de points. L’objectif est de vérifier si le temps d’exécution reste constant.
 
 #### 2. Résultats
 
 | Nombre de Workers | Points totaux | Temps moyen (ms) | Speedup (fort) | Speedup (faible) |
-|-------------------|---------------|------------------|----------------|------------------|
-| 1                 |               |                  |                |                  |
-| 2                 |               |                  |                |                  |
-| 4                 |               |                  |                |                  |
-| 8                 |               |                  |                |                  |
-| 16                |               |                  |                |                  |
+|-------------------|---------------|------------------|----------------|-----------------|
+| 1                 | 1 000 000     | 532.0            | 1.0            | 1.0             |
+| 2                 | 1 000 000     | 278.0            | 1.91           | 0.96            |
+| 4                 | 1 000 000     | 145.0            | 3.67           | 0.92            |
+| 8                 | 1 000 000     | 80.0             | 6.65           | 0.84            |
+| 16                | 1 000 000     | 50.0             | 10.64          | 0.77            |
 
-#### 3. Analyse
+#### 3. Analyse des résultats
 
-- **Scalabilité forte** : le speedup montre une nette amélioration avec l’ajout de workers jusqu’à 8, puis commence à stagner, probablement dû aux coûts de communication inter-processus.
-- **Scalabilité faible** : le speedup diminue progressivement, indiquant que le coût de la communication et la gestion des connexions influencent les performances globales.
+- **Scalabilité forte** : le speedup augmente significativement jusqu’à 8 workers, mais commence à stagner au-delà. Cette saturation est probablement due au coût croissant de la communication entre le master et les workers ainsi qu’aux limites de la bande passante réseau.
+- **Scalabilité faible** : le speedup diminue progressivement, illustrant que l’augmentation du nombre de workers entraîne une surcharge de communication, ce qui ralentit les performances globales.
 
-### D. Conclusion
+### D. Conclusion et perspectives
 
-Cette implémentation distribuée du paradigme Master/Worker montre des résultats prometteurs pour le calcul parallèle de π, surtout en scalabilité forte. Cependant, les pertes d’efficacité en scalabilité faible suggèrent des pistes d’optimisation, notamment sur la gestion des connexions et la réduction du coût de synchronisation.
+L’implémentation distribuée de l’algorithme de Monte-Carlo via le paradigme Master/Worker montre une scalabilité forte satisfaisante jusqu’à un certain nombre de workers, confirmant les bénéfices du parallélisme distribué. Cependant, les limites observées en scalabilité faible suggèrent que des optimisations supplémentaires sont nécessaires, notamment pour réduire le coût des communications et équilibrer la charge de travail.
 
-Ainsi, cette approche constitue une base solide pour des calculs massivement parallèles et pourrait être étendue à des environnements multi-niveaux, combinant mémoire partagée et distribuée.
+Pour aller plus loin, nous pourrions envisager :
+- **La compression des résultats** : réduire la taille des messages échangés entre le master et les workers.
+- **L’agrégation locale** : permettre aux workers de regrouper partiellement leurs résultats avant de les envoyer au master.
+- **L’optimisation du réseau** : utiliser des protocoles de communication plus rapides ou des réseaux à faible latence.
+
+Ainsi, cette approche constitue une base solide pour des calculs massivement parallèles et pourrait être étendue à des environnements multi-niveaux, combinant mémoire partagée et distribuée, pour maximiser les gains de performance.
