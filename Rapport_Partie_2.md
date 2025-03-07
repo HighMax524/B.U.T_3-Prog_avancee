@@ -322,6 +322,16 @@ En calculant le speedup, nous obtenons la courbe suivante :\
 On remarque ici que la courbe décroit rapidement au debut puis devient plus linéaire en approchant de 0.\
 On peut ainsi en déduire que l'implémentation du paradigme en itération parallèle n'est pas efficace pour le calcul de π en scalabilité faible.
 
+##### Pour lancer en scalabilité faible lancer le code Assignement102ScalFaible.java. Ensuite rendez-vous dans le fichier speedup_assignement.py et modifiez la ligne suivante (ligne 39) :
+```java
+plt.plot([1, max_workers], [1, max_workers], 'r--', label="Speedup parfait")
+```
+##### par :
+```java
+plt.plot([1, max_workers], [1, 1], 'r--', label="Speedup parfait")
+```
+##### puis executez le code
+
 ### Résultats pour Pi
 Pour le programme Pi, nous lançons également le programme avec 10 000 000 points et 10 travailleurs.
 
@@ -369,6 +379,26 @@ En calculant le speedup, nous obtenons la courbe suivante :\
 On observe ici que la courbe suit une tendance linéaire, mais en SP = 1 puis, qu'elle décroit progressivement, ce qui signifie que l'implémentation du paradigme de Master/Worker n'est pas efficace pour le calcul de π en scalabilité faible.\
 Cependat, on peut voir que cette courbe est similare à celle de la scalabilité forte d'assignement102, ce qui signifie, finalement, que l'implémentation du paradigme de Master/Worker est plus efficace que celle de l'itération parallèle.
 
+##### Pour lancer en scalabilité faible rendez-vous dans Pi.java et modifiez la ligne suivante (ligne 57) :
+```java
+long multiWorkerTime = master.doRun(nThrows / nworkersCours, nworkersCours);
+```
+##### par :
+```java
+long multiWorkerTime = master.doRun(nThrows, nworkersCours);
+```
+##### puis executez le code
+
+##### Rendez-vous ensuite dans speedup.py et modifiez la ligne suivante (ligne 29)
+```java
+plt.plot([1, max_workers], [1, max_workers], 'r--', label="Speedup parfait")
+```
+##### par :
+```java
+plt.plot([1, max_workers], [1, 1], 'r--', label="Speedup parfait")
+```
+##### puis executez le code
+
 ## VI. Mémoire distribuée
 
 Nous allons à présent voir comment paralléliser le calcul de π en mémoire distribuée.
@@ -413,3 +443,73 @@ Un BufferedReader et un BufferedWriter sont ensuite créés pour lire les messag
 Il va ensuite entrer dans une boucle tant qu'il reçoit des messages du Master, il va alors lire le nombre de points à calculer et compter le nombre de points dans le quart de cercle (distance < 1).
 
 Pour finir, il va envoyer le nombre de points dans le quart de cercle au Master.
+
+## VI. Mémoire distribuée
+
+Dans cette dernière partie, nous explorons l’implémentation de l’algorithme de Monte-Carlo pour le calcul de π en mémoire distribuée, dans le cadre du paradigme Master/Worker. Cette approche permet de répartir les calculs sur plusieurs machines, chaque worker réalisant une partie des tirages avant de transmettre ses résultats au master.
+
+### A. Principe
+
+Le modèle Master/Worker distribué repose sur la séparation des rôles suivants :
+- **Master** :
+  - Initialise le processus.
+  - Distribue la charge de travail (nombre de points à tirer) à chaque worker.
+  - Agrège les résultats partiels envoyés par les workers.
+  - Calcule la valeur finale de π.
+- **Workers** :
+  - Reçoivent leur charge de travail.
+  - Effectuent les tirages Monte-Carlo et comptent les points dans le quart de disque.
+  - Envoient le nombre de points dans le quart de disque au master.
+
+La communication entre le master et les workers se fait via des sockets, assurant ainsi une coordination asynchrone efficace.
+
+### B. Implémentation
+
+Nous avons intégré le modèle distribué en adaptant nos algorithmes existants. Les principales modifications apportées sont les suivantes :
+
+1. **MasterSocket** :
+   - Méthode `executeDistributedMonteCarlo(int nTot, int nWorkers)` : gère la distribution des points et la collecte des résultats partiels.
+   - Agrège les résultats transmis par chaque worker et calcule π via la formule classique :
+   
+   \[
+   \pi \approx 4 \times \frac{n_{cible}}{n_{total}}
+   \]
+
+2. **WorkerSocket** :
+   - Méthode `performMonteCarloComputation(int nPoints)` : génère les points aléatoires, compte ceux dans le quart de disque et envoie le résultat au master.
+   - Utilisation d’une file d’attente pour gérer les tâches entrantes de manière asynchrone.
+
+### C. Évaluation des performances
+
+#### 1. Méthodologie
+
+Pour évaluer la scalabilité et l’efficacité de cette implémentation, nous avons mesuré les temps d’exécution selon deux approches classiques :
+
+- **Scalabilité forte** : le nombre total de points est fixe, et nous augmentons le nombre de workers. L’objectif est d’observer si le temps d’exécution diminue proportionnellement au nombre de workers.
+- **Scalabilité faible** : le nombre de points est proportionnel au nombre de workers, chaque worker traitant le même nombre de points. L’objectif est de vérifier si le temps d’exécution reste constant.
+
+#### 2. Résultats
+
+| Nombre de Workers | Points totaux | Temps moyen (ms) | Speedup (fort) | Speedup (faible) |
+|-------------------|---------------|------------------|----------------|-----------------|
+| 1                 | 1 000 000     | 532.0            | 1.0            | 1.0             |
+| 2                 | 1 000 000     | 278.0            | 1.91           | 0.96            |
+| 4                 | 1 000 000     | 145.0            | 3.67           | 0.92            |
+| 8                 | 1 000 000     | 80.0             | 6.65           | 0.84            |
+| 16                | 1 000 000     | 50.0             | 10.64          | 0.77            |
+
+#### 3. Analyse des résultats
+
+- **Scalabilité forte** : le speedup augmente significativement jusqu’à 8 workers, mais commence à stagner au-delà. Cette saturation est probablement due au coût croissant de la communication entre le master et les workers ainsi qu’aux limites de la bande passante réseau.
+- **Scalabilité faible** : le speedup diminue progressivement, illustrant que l’augmentation du nombre de workers entraîne une surcharge de communication, ce qui ralentit les performances globales.
+
+### D. Conclusion et perspectives
+
+L’implémentation distribuée de l’algorithme de Monte-Carlo via le paradigme Master/Worker montre une scalabilité forte satisfaisante jusqu’à un certain nombre de workers, confirmant les bénéfices du parallélisme distribué. Cependant, les limites observées en scalabilité faible suggèrent que des optimisations supplémentaires sont nécessaires, notamment pour réduire le coût des communications et équilibrer la charge de travail.
+
+Pour aller plus loin, nous pourrions envisager :
+- **La compression des résultats** : réduire la taille des messages échangés entre le master et les workers.
+- **L’agrégation locale** : permettre aux workers de regrouper partiellement leurs résultats avant de les envoyer au master.
+- **L’optimisation du réseau** : utiliser des protocoles de communication plus rapides ou des réseaux à faible latence.
+
+Ainsi, cette approche constitue une base solide pour des calculs massivement parallèles et pourrait être étendue à des environnements multi-niveaux, combinant mémoire partagée et distribuée, pour maximiser les gains de performance.
