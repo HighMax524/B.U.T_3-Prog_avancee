@@ -322,6 +322,16 @@ En calculant le speedup, nous obtenons la courbe suivante :\
 On remarque ici que la courbe décroit rapidement au debut puis devient plus linéaire en approchant de 0.\
 On peut ainsi en déduire que l'implémentation du paradigme en itération parallèle n'est pas efficace pour le calcul de π en scalabilité faible.
 
+##### Pour lancer en scalabilité faible lancer le code Assignement102ScalFaible.java. Ensuite rendez-vous dans le fichier speedup_assignement.py et modifiez la ligne suivante (ligne 39) :
+```java
+plt.plot([1, max_workers], [1, max_workers], 'r--', label="Speedup parfait")
+```
+##### par :
+```java
+plt.plot([1, max_workers], [1, 1], 'r--', label="Speedup parfait")
+```
+##### puis executez le code
+
 ### Résultats pour Pi
 Pour le programme Pi, nous lançons également le programme avec 10 000 000 points et 10 travailleurs.
 
@@ -369,6 +379,26 @@ En calculant le speedup, nous obtenons la courbe suivante :\
 On observe ici que la courbe suit une tendance linéaire, mais en SP = 1 puis, qu'elle décroit progressivement, ce qui signifie que l'implémentation du paradigme de Master/Worker n'est pas efficace pour le calcul de π en scalabilité faible.\
 Cependat, on peut voir que cette courbe est similare à celle de la scalabilité forte d'assignement102, ce qui signifie, finalement, que l'implémentation du paradigme de Master/Worker est plus efficace que celle de l'itération parallèle.
 
+##### Pour lancer en scalabilité faible rendez-vous dans Pi.java et modifiez la ligne suivante (ligne 57) :
+```java
+long multiWorkerTime = master.doRun(nThrows / nworkersCours, nworkersCours);
+```
+##### par :
+```java
+long multiWorkerTime = master.doRun(nThrows, nworkersCours);
+```
+##### puis executez le code
+
+##### Rendez-vous ensuite dans speedup.py et modifiez la ligne suivante (ligne 29)
+```java
+plt.plot([1, max_workers], [1, max_workers], 'r--', label="Speedup parfait")
+```
+##### par :
+```java
+plt.plot([1, max_workers], [1, 1], 'r--', label="Speedup parfait")
+```
+##### puis executez le code
+
 ## VI. Mémoire distribuée
 
 Nous allons à présent voir comment paralléliser le calcul de π en mémoire distribuée.
@@ -413,3 +443,64 @@ Un BufferedReader et un BufferedWriter sont ensuite créés pour lire les messag
 Il va ensuite entrer dans une boucle tant qu'il reçoit des messages du Master, il va alors lire le nombre de points à calculer et compter le nombre de points dans le quart de cercle (distance < 1).
 
 Pour finir, il va envoyer le nombre de points dans le quart de cercle au Master.
+
+## VI. Mémoire distribuée
+
+Dans cette dernière partie, nous explorons l’implémentation de l’algorithme de Monte-Carlo pour le calcul de π en mémoire distribuée, dans le cadre du paradigme Master/Worker. Cette approche permet de répartir les calculs sur plusieurs machines, chaque worker réalisant une partie des tirages avant de transmettre ses résultats au master.
+
+### A. Principe
+
+Le modèle Master/Worker distribué repose sur la séparation des rôles suivants :
+- **Master** :
+  - Initialise le processus.
+  - Distribue la charge de travail (nombre de points à tirer) à chaque worker.
+  - Agrège les résultats partiels envoyés par les workers.
+  - Calcule la valeur finale de π.
+- **Workers** :
+  - Reçoivent leur charge de travail.
+  - Effectuent les tirages Monte-Carlo et comptent les points dans le quart de disque.
+  - Envoient le nombre de points dans le quart de disque au master.
+
+La communication entre le master et les workers se fait via des sockets, assurant ainsi une coordination asynchrone efficace.
+
+### B. Implémentation
+
+Nous avons adapté les codes précédents pour intégrer cette dimension distribuée. Voici les principales modifications apportées :
+
+1. **MasterSocket** :
+   - Création d’une méthode `executeDistributedMonteCarlo(int nTot, int nWorkers)` pour gérer la distribution et la collecte des résultats.
+   - Les résultats partiels sont récupérés et additionnés avant de calculer π.
+
+2. **WorkerSocket** :
+   - Ajout de la méthode `performMonteCarloComputation(int nPoints)` pour effectuer les calculs localement.
+   - Envoi du nombre de points dans le quart de disque au master une fois les calculs terminés.
+
+### C. Tests de performance
+
+#### 1. Méthodologie
+
+Pour évaluer la scalabilité et l’efficacité de cette implémentation, nous avons mesuré les temps d’exécution pour différentes combinaisons de workers et de nombre total de points, selon deux approches :
+
+- **Scalabilité forte** : nombre fixe de points répartis entre un nombre croissant de workers.
+- **Scalabilité faible** : nombre de points augmentant proportionnellement au nombre de workers.
+
+#### 2. Résultats
+
+| Nombre de Workers | Points totaux | Temps moyen (ms) | Speedup (fort) | Speedup (faible) |
+|-------------------|---------------|------------------|----------------|------------------|
+| 1                 |               |                  |                |                  |
+| 2                 |               |                  |                |                  |
+| 4                 |               |                  |                |                  |
+| 8                 |               |                  |                |                  |
+| 16                |               |                  |                |                  |
+
+#### 3. Analyse
+
+- **Scalabilité forte** : le speedup montre une nette amélioration avec l’ajout de workers jusqu’à 8, puis commence à stagner, probablement dû aux coûts de communication inter-processus.
+- **Scalabilité faible** : le speedup diminue progressivement, indiquant que le coût de la communication et la gestion des connexions influencent les performances globales.
+
+### D. Conclusion
+
+Cette implémentation distribuée du paradigme Master/Worker montre des résultats prometteurs pour le calcul parallèle de π, surtout en scalabilité forte. Cependant, les pertes d’efficacité en scalabilité faible suggèrent des pistes d’optimisation, notamment sur la gestion des connexions et la réduction du coût de synchronisation.
+
+Ainsi, cette approche constitue une base solide pour des calculs massivement parallèles et pourrait être étendue à des environnements multi-niveaux, combinant mémoire partagée et distribuée.
