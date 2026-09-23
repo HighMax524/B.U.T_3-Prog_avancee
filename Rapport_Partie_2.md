@@ -248,7 +248,7 @@ Voici le calcul du speedup :
 
 $$Speedup = \frac{\text{Temps d'éxecution pour 1 processus}}{\text{Temps d'éxecution pour n processus}}$$
 
-Le speedup idéal est linéaire, c'est à dire que si on double le nombre de processus, le temps d'éxecution doit 2 fois plus rapide.
+Le speedup idéal est linéaire, c'est à dire que si on double le nombre de processus, le temps d'éxecution doit être 2 fois plus rapide.
 
 <img src="res/Schema_spedup.png" alt="Schéma représentant le speedup" width="428"/>
 
