@@ -33,7 +33,7 @@ Pour cela il a fallu créer :
 -	La classe **Main** qui permet de lancer le programme et d’instancier et de démarrer les différentes tâches.
 -	Une classe **Affichage** qui étend Thread. Cette classe a pour but d’afficher les différents messages des tâches grâce à une boucle contenant la méthode System.out.print()
 
-Pour faire en sorte que la boucle affiche les messages dan le bonne ordre (« AAABB » ou «BBAAA » et non « AABAB » ou « BAAAB » ou autre) il a fallu utiliser la méthode synchronized.
+Pour faire en sorte que la boucle affiche les messages dans le bon ordre (« AAABB » ou «BBAAA » et non « AABAB » ou « BAAAB » ou autre) il a fallu utiliser la méthode synchronized.
 Cette méthode agit comme un verrou mutex et permet donc de s’assurer que la section critique est utilisée seulement par un seul thread a chaque fois afin que chaque thread affiche son message en entier avant qu’un autre Thread affiche son message également.
 Pour faire cela il y a 2 méthodes possible : 
 -	Celle où on ne connaît pas la ressource critique. Pour cela on crée une fausse classe Exclusion puis on synchronized sur cette classe
